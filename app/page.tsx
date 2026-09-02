@@ -18,6 +18,52 @@ const schoolKit = [
   { item: 'Other educational & extra expenses', quantity: '—', cost: '$50.00' },
 ];
 
+const commitments = [
+  {
+    emoji: '🧾',
+    title: 'A receipt for every gift',
+    text: 'Every donation is confirmed personally, with a receipt showing exactly what your money was used for.',
+  },
+  {
+    emoji: '📸',
+    title: 'Photo & video proof',
+    text: 'We send photos and videos from the meals, school-supply purchases and rice distributions your gift made possible.',
+  },
+  {
+    emoji: '💬',
+    title: 'You talk to a real person',
+    text: 'No forms, no call centers. You message us directly on Telegram or email, and we reply within 24 hours.',
+  },
+  {
+    emoji: '🚪',
+    title: 'An open door',
+    text: 'Visiting Phnom Penh? Come meet the children and elders yourself. Any donor is welcome to see our work in person.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'How do I actually donate?',
+    a: 'Message us on Telegram or email (see the contact section below). We will send you our KHQR code or bank details, confirm when your gift arrives, and follow up with a receipt and photos of what it funded. Online card payments are launching soon.',
+  },
+  {
+    q: 'How do I know my money reaches the children?',
+    a: 'Three ways: our full budget is published on this page down to the price of a pen; every donation gets a receipt plus photo or video proof of what it bought; and you are welcome to visit us in Phnom Penh and see the work yourself.',
+  },
+  {
+    q: 'Who runs this organization?',
+    a: 'We are a small community team in Phnom Penh working directly with the children and elders you see in the photos and videos on this page. When you contact us, you speak with the people doing the work — not an intermediary.',
+  },
+  {
+    q: 'Can I give supplies instead of money?',
+    a: 'Yes. Rice, school supplies, uniforms and books are always needed. Message us first so we can tell you exactly what the children need right now.',
+  },
+  {
+    q: 'Can I visit or volunteer?',
+    a: 'Absolutely. Teach English, help at a rice distribution, or just come and meet everyone. Contact us on Telegram or email and we will arrange it.',
+  },
+];
+
 const budget = [
   {
     program: 'Daily meals for 79 children',
@@ -362,6 +408,77 @@ function Transparency() {
   );
 }
 
+function OurPromise() {
+  return (
+    <section id="promise" className="mx-auto max-w-6xl px-5 py-20">
+      <div className="mb-12 max-w-2xl">
+        <p className="mb-3 text-sm font-bold uppercase tracking-wider text-[#f26b3a]">
+          Our promise to donors
+        </p>
+        <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
+          You&apos;ll always know what your gift did
+        </h2>
+        <p className="mt-4 leading-relaxed text-stone-600">
+          We&apos;re a small team, and we treat every donation like it came from
+          a friend — because it did. Here is what we commit to, for every
+          single gift.
+        </p>
+      </div>
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {commitments.map((c) => (
+          <div
+            key={c.title}
+            className="rounded-3xl border border-orange-100 bg-white p-7"
+          >
+            <span className="grid h-12 w-12 place-items-center rounded-2xl bg-orange-100 text-2xl">
+              {c.emoji}
+            </span>
+            <h3 className="mt-5 text-lg font-bold">{c.title}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-stone-600">
+              {c.text}
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function Faq() {
+  return (
+    <section id="faq" className="border-y border-orange-100/60 bg-white">
+      <div className="mx-auto max-w-3xl px-5 py-20">
+        <div className="mb-10 text-center">
+          <p className="mb-3 text-sm font-bold uppercase tracking-wider text-[#f26b3a]">
+            Common questions
+          </p>
+          <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
+            Honest answers, before you give
+          </h2>
+        </div>
+        <div className="space-y-3">
+          {faqs.map((faq) => (
+            <details
+              key={faq.q}
+              className="group rounded-2xl border border-orange-100 bg-[#fdf8f3] px-6 py-4 open:bg-white"
+            >
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-bold marker:hidden">
+                {faq.q}
+                <span className="text-xl text-[#f26b3a] transition group-open:rotate-45">
+                  +
+                </span>
+              </summary>
+              <p className="mt-3 text-sm leading-relaxed text-stone-600">
+                {faq.a}
+              </p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Donate() {
   return (
     <section id="donate" className="mx-auto max-w-6xl px-5 py-20">
@@ -460,7 +577,7 @@ function Footer() {
         </div>
         <div>
           <p className="mb-4 text-sm font-bold uppercase tracking-wider text-stone-400">
-            Contact
+            Contact &amp; donate
           </p>
           <ul className="space-y-2.5 text-sm font-medium text-stone-600">
             <li>
@@ -483,6 +600,12 @@ function Footer() {
             </li>
             <li>Phnom Penh, Cambodia 🇰🇭</li>
           </ul>
+          <p className="mt-4 max-w-xs rounded-2xl bg-orange-50 px-4 py-3 text-xs leading-relaxed text-stone-600">
+            <strong className="text-stone-800">To donate:</strong> message us
+            and we&apos;ll send our KHQR code or bank details, confirm your
+            gift, and follow up with a receipt and photos. We reply within 24
+            hours.
+          </p>
         </div>
       </div>
       <div className="border-t border-orange-100/60 py-5 text-center text-xs text-stone-400">
@@ -501,7 +624,9 @@ export default function Home() {
       <Programs />
       <FromTheField />
       <Transparency />
+      <OurPromise />
       <Donate />
+      <Faq />
       <Volunteer />
       <Footer />
     </main>
