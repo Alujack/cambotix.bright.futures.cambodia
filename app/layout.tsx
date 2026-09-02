@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Bright Futures Cambodia — Caring for Children & Elders',
+  title: 'Bright Futures Cambodia | Caring for Children & Elders',
   description:
     'Daily meals and full school support for 79 children, and rice and care for the elders of our community in Cambodia. See exactly where every dollar goes.',
 };

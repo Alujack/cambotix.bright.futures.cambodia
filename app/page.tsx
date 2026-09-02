@@ -1,13 +1,13 @@
 import DonateWidget from './components/DonateWidget';
 
-// Placeholder identity — swap for the NGO's registered name before launch.
+// Placeholder identity. Swap for the NGO's registered name before launch.
 const NGO_NAME = 'Bright Futures Cambodia';
 
 const stats = [
   { value: '79', label: 'Children in our care' },
   { value: '28,835', label: 'Meals provided every year' },
   { value: '$0.89', label: 'Feeds one child for a day' },
-  { value: '$35,228', label: "Annual children's budget — fully itemized" },
+  { value: '$35,228', label: "Fully itemized annual children's budget" },
 ];
 
 const schoolKit = [
@@ -15,7 +15,7 @@ const schoolKit = [
   { item: 'Pens', quantity: '10 pens', cost: '$2.50' },
   { item: 'School bags', quantity: '2 bags', cost: '$20.00' },
   { item: 'School clothes', quantity: '3 sets', cost: '$45.00' },
-  { item: 'Other educational & extra expenses', quantity: '—', cost: '$50.00' },
+  { item: 'Other educational & extra expenses', quantity: 'Various', cost: '$50.00' },
 ];
 
 const commitments = [
@@ -52,7 +52,7 @@ const faqs = [
   },
   {
     q: 'Who runs this organization?',
-    a: 'We are a small community team in Phnom Penh working directly with the children and elders you see in the photos and videos on this page. When you contact us, you speak with the people doing the work — not an intermediary.',
+    a: 'We are a small community team in Phnom Penh working directly with the children and elders you see in the photos and videos on this page. When you contact us, you speak with the people doing the work, not an intermediary.',
   },
   {
     q: 'Can I give supplies instead of money?',
@@ -69,7 +69,7 @@ const budget = [
     program: 'Daily meals for 79 children',
     cost: '$25,550.00',
     percent: 72.5,
-    detail: 'Rice, vegetables and meat — $70 per day for all 79 children',
+    detail: 'Rice, vegetables and meat at $70 per day for all 79 children',
   },
   {
     program: 'School & educational support',
@@ -128,7 +128,7 @@ function Hero() {
           </h1>
           <p className="mt-6 max-w-lg text-lg leading-relaxed text-stone-600">
             We care for <strong>79 children</strong> and the{' '}
-            <strong>elders of our community</strong> in Cambodia — warm meals
+            <strong>elders of our community</strong> in Cambodia. Warm meals
             every day, everything the kids need for school, and rice for
             grandmothers and grandfathers with no one else to lean on.
           </p>
@@ -222,7 +222,7 @@ function Programs() {
           <div className="p-7">
             <h3 className="text-xl font-bold">Daily meals for 79 children</h3>
             <p className="mt-2.5 leading-relaxed text-stone-600">
-              Nutritious meals with rice, vegetables and meat — every child,
+              Nutritious meals with rice, vegetables and meat for every child,
               every day of the year. The total cost is about{' '}
               <strong>$70 per day</strong>, or <strong>$25,550 per year</strong>.
             </p>
@@ -242,8 +242,8 @@ function Programs() {
             <h3 className="text-xl font-bold">School &amp; educational support</h3>
             <p className="mt-2.5 leading-relaxed text-stone-600">
               Books, pens, school bags, uniforms and other school expenses for
-              every child — <strong>$122.50 per child per year</strong>,{' '}
-              <strong>$9,677.50</strong> for all 79 children.
+              every child. It costs <strong>$122.50 per child per year</strong>,
+              or <strong>$9,677.50</strong> for all 79 children.
             </p>
             <p className="mt-4 inline-block rounded-xl bg-orange-50 px-4 py-2 text-sm font-bold text-[#e05a29]">
               $122.50 equips one child for a full school year
@@ -260,9 +260,9 @@ function Programs() {
           <div className="p-7">
             <h3 className="text-xl font-bold">Care for the elderly</h3>
             <p className="mt-2.5 leading-relaxed text-stone-600">
-              We bring rice, food and care to elderly people in our community —
-              grandmothers and grandfathers living alone or without support,
-              through regular distribution events.
+              We bring rice, food and care to grandmothers and grandfathers in
+              our community who live alone or without support, through regular
+              distribution events.
             </p>
             <p className="mt-4 inline-block rounded-xl bg-orange-50 px-4 py-2 text-sm font-bold text-[#e05a29]">
               A bag of rice carries an elder through the month
@@ -285,7 +285,7 @@ function FromTheField() {
           Moments with our children and elders
         </h2>
         <p className="mt-4 leading-relaxed text-stone-600">
-          From our latest visits — the children in our care and the elders we
+          From our latest visits: the children in our care and the elders we
           bring rice to.
         </p>
       </div>
@@ -338,7 +338,7 @@ function Transparency() {
         <div className="grid gap-10 lg:grid-cols-2">
           <div>
             <h3 className="mb-4 text-lg font-bold">
-              Annual budget — $35,227.50 total
+              Annual budget: $35,227.50 total
             </h3>
             <div className="space-y-5">
               {budget.map((line) => (
@@ -427,7 +427,7 @@ function OurPromise() {
         </h2>
         <p className="mt-4 leading-relaxed text-stone-600">
           We&apos;re a small team, and we treat every donation like it came from
-          a friend — because it did. Here is what we commit to, for every
+          a friend, because it did. Here is what we commit to, for every
           single gift.
         </p>
       </div>
@@ -498,7 +498,7 @@ function Donate() {
             Your support is really powerful.
           </h2>
           <p className="mt-5 max-w-md leading-relaxed text-stone-600">
-            Every gift maps directly to a real cost in our published budget —
+            Every gift maps directly to a real cost in our published budget:
             meals on the table, children in school, and rice in the hands of
             our elders. Give once, or become a monthly supporter and carry a
             child through the whole year.
@@ -508,7 +508,7 @@ function Donate() {
               ['🍚', '$27 a month feeds one child every single day'],
               ['🏫', '$70 feeds all 79 children for one full day'],
               ['🎒', '$123 sends one child to school for a year'],
-              ['💛', '$446 covers one child completely — meals + school'],
+              ['💛', '$446 covers one child completely, meals and school'],
             ].map(([emoji, text]) => (
               <li key={text} className="flex items-center gap-3.5">
                 <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-orange-100 text-lg">
@@ -539,7 +539,7 @@ function Volunteer() {
           <p className="mt-4 max-w-xl leading-relaxed text-stone-300">
             Teach English, run activities, help at a rice distribution or share
             your professional skills. A few hours of your time changes what a
-            child believes is possible — and brightens an elder&apos;s whole
+            child believes is possible, and brightens an elder&apos;s whole
             week.
           </p>
         </div>
@@ -567,7 +567,7 @@ function Footer() {
           </div>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-stone-500">
             Daily meals and full school support for 79 children, and rice and
-            care for the elders of our community in Cambodia — with a fully
+            care for the elders of our community in Cambodia, with a fully
             published budget.
           </p>
         </div>
