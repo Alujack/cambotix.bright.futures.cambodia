@@ -22,7 +22,7 @@ export default function DonateWidget() {
   const activeTier = tiers.find((t) => t.amount === selected && custom === '');
 
   return (
-    <div className="rounded-3xl border border-orange-100 bg-white p-6 shadow-[0_24px_60px_rgb(242_107_58/8%)] sm:p-8">
+    <div className="rounded-3xl border border-orange-100 bg-white p-4 shadow-[0_24px_60px_rgb(242_107_58/8%)] min-[360px]:p-5 sm:p-8">
       <div className="mb-6 grid grid-cols-2 gap-2 rounded-2xl bg-orange-50 p-1.5">
         {(
           [
@@ -45,7 +45,7 @@ export default function DonateWidget() {
         ))}
       </div>
 
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 gap-3 min-[360px]:grid-cols-2">
         {tiers.map((tier) => (
           <button
             key={tier.amount}

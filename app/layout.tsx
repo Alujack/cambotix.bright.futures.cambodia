@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
+import SiteFooter from './components/SiteFooter';
+import SiteHeader from './components/SiteHeader';
 import './globals.css';
 
 const geistSans = Geist({
@@ -13,9 +15,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Bright Futures Cambodia | Caring for Children & Elders',
+  title: 'Dr. Joseph Helping Children Community | Cambodia',
   description:
-    'Daily meals and full school support for 79 children, and rice and care for the elders of our community in Cambodia. See exactly where every dollar goes.',
+    'Helping children and communities in Cambodia through education, food, care, and meaningful opportunities for a better future.',
+  icons: {
+    icon: '/favicon.svg',
+  },
 };
 
 export default function RootLayout({
@@ -28,7 +33,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <SiteHeader />
         {children}
+        <SiteFooter />
       </body>
     </html>
   );
