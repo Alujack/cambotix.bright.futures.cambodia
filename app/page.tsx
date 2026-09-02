@@ -83,6 +83,7 @@ function Header() {
   const links = [
     ['Programs', '#programs'],
     ['Transparency', '#transparency'],
+    ['FAQ', '#faq'],
     ['Volunteer', '#volunteer'],
     ['Contact', '#contact'],
   ];
@@ -145,6 +146,12 @@ function Hero() {
               Become a volunteer
             </a>
           </div>
+          <p className="mt-6 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm font-medium text-stone-500">
+            <span className="text-[#f26b3a]">✓</span> Fully published budget
+            <span className="text-[#f26b3a]">✓</span> Receipt &amp; photo proof
+            for every gift
+            <span className="text-[#f26b3a]">✓</span> Visitors welcome
+          </p>
         </div>
 
         <div className="relative">
