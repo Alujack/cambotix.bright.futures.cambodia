@@ -113,7 +113,7 @@ export default function DonateWidget() {
         {frequency === 'monthly' ? 'monthly' : ''}
       </a>
       <p className="mt-3 text-center text-xs text-stone-400">
-        Online payments via KHQR &amp; ABA PayWay are launching soon — contact
+        Online payments via KHQR &amp; ABA PayWay are launching soon. Contact
         us below to give today.
       </p>
     </div>
