@@ -19,9 +19,6 @@ export const metadata: Metadata = {
   title: 'Dr. Joseph Helping Children Community | Cambodia',
   description:
     'Helping children and communities in Cambodia through education, food, care, and meaningful opportunities for a better future.',
-  icons: {
-    icon: '/favicon.svg',
-  },
 };
 
 export default function RootLayout({
