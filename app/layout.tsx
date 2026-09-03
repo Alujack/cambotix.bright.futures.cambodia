@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
-import LanguageSwitcher from './components/LanguageSwitcher';
 import SiteFooter from './components/SiteFooter';
 import SiteHeader from './components/SiteHeader';
 import './globals.css';
@@ -34,7 +33,6 @@ export default function RootLayout({
         <SiteHeader />
         {children}
         <SiteFooter />
-        <LanguageSwitcher />
       </body>
     </html>
   );
