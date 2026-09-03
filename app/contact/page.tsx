@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import DonateWidget from '../components/DonateWidget';
+import PageIntro from '../components/PageIntro';
 
 export const metadata: Metadata = {
   title: 'Contact Us | Dr. Joseph Helping Children Community',
@@ -15,15 +16,13 @@ const faqs = [
 export default function ContactPage() {
   return (
     <main>
-      <section className="border-b border-orange-100 bg-white">
-        <div className="mx-auto max-w-6xl px-4 py-10 sm:px-5 sm:py-16">
-          <p className="text-sm font-bold uppercase tracking-wider text-[#f26b3a]">Contact Us</p>
-          <h1 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-5xl">Talk directly with our team</h1>
-          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-stone-600">Ask a question, arrange a visit, volunteer, or support one of our projects.</p>
-        </div>
-      </section>
+      <PageIntro
+        eyebrow="Contact Us"
+        title="Talk directly with our local team."
+        description="Ask a question, arrange a visit, explore volunteering, or find the best way to support a project."
+      />
 
-      <section id="contact" className="mx-auto grid max-w-6xl scroll-mt-24 gap-10 px-4 py-12 sm:scroll-mt-36 sm:px-5 sm:py-14 lg:grid-cols-[0.8fr_1.2fr]">
+      <section id="contact" className="mx-auto grid max-w-7xl scroll-mt-24 gap-10 px-4 py-12 sm:scroll-mt-36 sm:px-6 sm:py-16 lg:grid-cols-[0.8fr_1.2fr] lg:px-8">
         <div>
           <div className="space-y-4">
             <a href="https://t.me/Lemongrassoils" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 rounded-2xl border border-orange-100 bg-white p-5 transition hover:border-[#f26b3a]">

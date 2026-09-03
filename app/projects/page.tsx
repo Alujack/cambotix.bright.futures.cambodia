@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
+import PageIntro from '../components/PageIntro';
+import ProjectVisual from '../components/ProjectVisual';
 import { projects } from '../content';
 
 export const metadata: Metadata = {
@@ -11,62 +12,53 @@ export const metadata: Metadata = {
 export default function ProjectsPage() {
   return (
     <main>
-      <section className="border-b border-orange-100 bg-white">
-        <div className="mx-auto max-w-6xl px-4 py-10 sm:px-5 sm:py-16">
-          <p className="text-sm font-bold uppercase tracking-wider text-[#f26b3a]">Our Projects</p>
-          <h1 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-5xl">Practical support that creates opportunity</h1>
-          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-stone-600">
-            Choose a project to learn how we support children, students, families, and elderly people in Cambodia.
-          </p>
-        </div>
-      </section>
+      <PageIntro
+        eyebrow="Our Projects"
+        title="Practical support that creates opportunity."
+        description="Explore four community-led projects supporting children, students, families, and elderly people in Cambodia."
+      />
 
-      <section className="mx-auto max-w-6xl px-4 py-8 sm:px-5 sm:py-10">
-        <nav aria-label="Project sections" className="grid grid-cols-2 gap-2 sm:gap-3 lg:grid-cols-4">
+      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
+        <nav aria-label="Project sections" className="mb-10 grid grid-cols-2 gap-3 lg:grid-cols-4">
           {projects.map((project) => (
-            <a key={project.number} href={`#project-${project.number}`} className="flex flex-col items-start gap-2 rounded-2xl border border-orange-100 bg-white p-3 font-bold transition hover:border-[#f26b3a] hover:text-[#e05a29] sm:flex-row sm:items-center sm:gap-3 sm:p-4">
-              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-orange-100 text-xs font-extrabold text-[#f26b3a]">{project.number}</span>
-              <span className="text-sm leading-snug">{project.title}</span>
+            <a key={project.slug} href={`#${project.slug}`} className="flex items-center gap-3 rounded-2xl border border-orange-100 bg-white p-3 text-sm font-extrabold transition hover:border-[#f26b3a] hover:text-[#d95121] sm:p-4">
+              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-orange-100 text-xs text-[#d95121]">{project.number}</span>
+              <span>{project.shortTitle}</span>
             </a>
           ))}
         </nav>
-      </section>
 
-      <section className="mx-auto max-w-6xl px-4 pb-14 sm:px-5 sm:pb-16">
-        <div className="grid gap-6 md:grid-cols-2">
-          {projects.map((project) => (
-            <article id={`project-${project.number}`} key={project.number} className="scroll-mt-36 overflow-hidden rounded-3xl border border-orange-100 bg-white">
-              {project.image ? (
-                <Image
-                  src={project.image}
-                  alt={project.imageAlt ?? ''}
-                  width={1200}
-                  height={600}
-                  sizes="(min-width: 768px) 50vw, 100vw"
-                  className="aspect-[2/1] w-full object-cover"
-                />
-              ) : (
-                <div className="grid aspect-[2/1] place-items-center bg-[linear-gradient(135deg,#e5edce,#f7f4e9)] text-7xl" aria-hidden="true">{project.emoji}</div>
-              )}
-              <div className="p-5 sm:p-8">
-                <p className="text-sm font-extrabold text-[#f26b3a]">{project.number}</p>
-                <h2 className="mt-2 text-2xl font-bold">{project.title}</h2>
-                <p className="mt-4 leading-relaxed text-stone-600">{project.description}</p>
-                <p className="mt-5 inline-block rounded-xl bg-orange-50 px-4 py-2 text-sm font-bold text-[#e05a29]">{project.highlight}</p>
+        <div className="space-y-7">
+          {projects.map((project, index) => (
+            <article id={project.slug} key={project.slug} className="scroll-mt-36 overflow-hidden rounded-[30px] border border-orange-100 bg-white shadow-[0_18px_55px_rgb(91_60_37/6%)]">
+              <div className="grid lg:grid-cols-2">
+                <div className={`relative min-h-[320px] sm:min-h-[440px] ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
+                  <ProjectVisual project={project} sizes="(min-width: 1024px) 50vw, 100vw" />
+                  <span className="absolute left-5 top-5 rounded-full bg-white/90 px-4 py-2 text-xs font-extrabold text-[#d95121] shadow-sm backdrop-blur">Project {project.number}</span>
+                </div>
+                <div className="flex flex-col justify-center p-6 sm:p-10 lg:p-12">
+                  <p className="text-xs font-extrabold uppercase tracking-[0.16em] text-[#e05a29]">{project.highlight}</p>
+                  <h2 className="mt-3 text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">{project.title}</h2>
+                  <p className="mt-5 leading-relaxed text-stone-600">{project.description}</p>
+                  <p className="mt-4 text-sm leading-relaxed text-stone-500">{project.introduction}</p>
+                  <Link href={`/projects/${project.slug}`} className="mt-7 inline-flex w-fit rounded-2xl bg-[#201a15] px-6 py-3.5 font-bold text-white transition hover:-translate-y-0.5 hover:bg-[#342b24]">
+                    Explore this project
+                  </Link>
+                </div>
               </div>
             </article>
           ))}
         </div>
       </section>
 
-      <section className="border-y border-orange-100 bg-white">
-        <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 py-12 sm:px-5 sm:py-14 lg:grid-cols-[1fr_auto]">
-          <div>
-            <p className="text-sm font-bold uppercase tracking-wider text-[#f26b3a]">Support the work</p>
-            <h2 className="mt-3 text-3xl font-extrabold tracking-tight">Help one of these projects continue</h2>
-            <p className="mt-3 max-w-2xl leading-relaxed text-stone-600">Contact our team to volunteer, donate supplies, fundraise, or make a financial contribution.</p>
+      <section className="bg-[#201a15] text-white">
+        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 px-4 py-14 sm:px-6 lg:flex-row lg:items-center lg:px-8">
+          <div className="max-w-3xl">
+            <p className="text-sm font-extrabold uppercase tracking-[0.16em] text-[#ff8b62]">Support the work</p>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Help one of these projects continue.</h2>
+            <p className="mt-3 leading-relaxed text-stone-300">Volunteer, donate supplies, fundraise, or make a financial contribution.</p>
           </div>
-          <Link href="/contact" className="w-full rounded-2xl bg-[#f26b3a] px-7 py-3.5 text-center font-bold text-white transition hover:bg-[#e05a29] sm:w-auto">Contact our team</Link>
+          <Link href="/contact" className="w-full rounded-2xl bg-[#f26b3a] px-7 py-4 text-center font-extrabold text-white transition hover:bg-[#df5524] sm:w-auto">Contact our team</Link>
         </div>
       </section>
     </main>
