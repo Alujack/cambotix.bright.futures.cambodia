@@ -23,7 +23,7 @@ export const team = [
       'Provides overall leadership and oversees our projects, programs, staff, and daily operations.',
   },
   {
-    name: 'Yoeun Yan',
+    name: 'Yoeurn Yan',
     role: 'IT & Website Supervisor',
     initials: 'YY',
     description:

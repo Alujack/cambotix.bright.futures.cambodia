@@ -16,6 +16,9 @@
 
 html {
   scroll-behavior: smooth;
+  /* 18px base instead of 16px: larger, easier-to-read text for older
+     visitors. All rem-based sizes across the site scale up with this. */
+  font-size: 112.5%;
 }
 
 body {
