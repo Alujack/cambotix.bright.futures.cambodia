@@ -91,24 +91,24 @@ export default function LanguageSwitcher() {
         id="google_translate_element"
         className="pointer-events-none fixed h-0 w-0 overflow-hidden"
       />
-      <div className="notranslate fixed bottom-5 right-5 z-50">
-        <label className="relative flex cursor-pointer items-center gap-2 rounded-full border border-orange-100 bg-white px-4 py-2.5 text-sm font-bold text-stone-700 shadow-lg transition hover:border-[#f26b3a]">
-          <span aria-hidden>🌐</span>
-          <span>{currentLabel}</span>
-          <select
-            aria-label="Select language"
-            value={current}
-            onChange={(e) => setLanguage(e.target.value)}
-            className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
-          >
-            {languages.map(([code, name]) => (
-              <option key={code} value={code}>
-                {name}
-              </option>
-            ))}
-          </select>
-        </label>
-      </div>
+      <label className="notranslate relative flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-xl border border-orange-200 bg-[#fdf8f3] text-sm font-bold text-stone-700 transition hover:border-[#f26b3a] lg:w-auto lg:gap-1.5 lg:px-3">
+        <span aria-hidden className="text-base">🌐</span>
+        <span className="hidden whitespace-nowrap lg:inline">
+          {currentLabel}
+        </span>
+        <select
+          aria-label="Select language"
+          value={current}
+          onChange={(e) => setLanguage(e.target.value)}
+          className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
+        >
+          {languages.map(([code, name]) => (
+            <option key={code} value={code}>
+              {name}
+            </option>
+          ))}
+        </select>
+      </label>
     </>
   );
 }

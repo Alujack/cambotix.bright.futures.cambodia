@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { NGO_NAME } from '../content';
 import HeartMark from './HeartMark';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const links = [
   ['Home', '/'],
@@ -50,6 +51,7 @@ export default function SiteHeader() {
         </nav>
 
         <div className="flex shrink-0 items-center gap-2">
+          <LanguageSwitcher />
           <Link
             href="/contact#donate"
             className="hidden rounded-xl bg-[#f26b3a] px-5 py-2.5 text-sm font-bold text-white transition hover:bg-[#e05a29] lg:block"
