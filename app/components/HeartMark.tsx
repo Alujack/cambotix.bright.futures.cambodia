@@ -4,7 +4,7 @@ type HeartMarkProps = {
   className?: string;
 };
 
-export default function HeartMark({ className = '' }: HeartMarkProps) {
+export default function HeartMark({ className = 'h-10 w-10' }: HeartMarkProps) {
   return (
     <Image
       src="/images/logo.png"
@@ -12,7 +12,7 @@ export default function HeartMark({ className = '' }: HeartMarkProps) {
       aria-hidden="true"
       width={48}
       height={48}
-      className={`h-10 w-10 shrink-0 object-contain ${className}`}
+      className={`shrink-0 object-contain ${className}`}
     />
   );
 }

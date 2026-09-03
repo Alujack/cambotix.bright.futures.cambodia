@@ -36,8 +36,8 @@ export default function SiteHeader() {
         <Link href="/" className="flex min-w-0 items-center gap-2.5 xl:shrink-0">
           <HeartMark className="h-11 w-11" />
           <span className="text-xs font-extrabold leading-[1.22] tracking-tight sm:text-sm">
-            <span className="block whitespace-nowrap xl:hidden">Dr. Joseph Helping Children</span>
-            <span className="block xl:hidden">Community</span>
+            <span className="block xl:hidden">Dr. Joseph Helping</span>
+            <span className="block xl:hidden">Children Community</span>
             <span className="hidden whitespace-nowrap text-sm xl:block 2xl:text-base">{NGO_NAME}</span>
           </span>
         </Link>

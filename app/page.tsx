@@ -9,13 +9,13 @@ export default function Home() {
       <section className="relative overflow-hidden bg-[#fffaf4]">
         <div aria-hidden="true" className="absolute -left-28 top-20 h-80 w-80 rounded-full bg-orange-200/35 blur-3xl" />
         <div aria-hidden="true" className="absolute -right-20 bottom-0 h-96 w-96 rounded-full bg-amber-100/70 blur-3xl" />
-        <div className="relative mx-auto grid min-h-[calc(100vh-108px)] max-w-7xl items-center gap-10 px-4 py-10 sm:px-6 sm:py-16 lg:grid-cols-[0.92fr_1.08fr] lg:gap-14 lg:px-8 lg:py-20">
+        <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-4 py-8 sm:gap-10 sm:px-6 sm:py-16 lg:min-h-[calc(100vh-108px)] lg:grid-cols-[0.92fr_1.08fr] lg:gap-14 lg:px-8 lg:py-20">
           <div className="order-2 lg:order-1">
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-orange-200 bg-white px-4 py-2 text-xs font-extrabold uppercase tracking-[0.14em] text-[#d95121] shadow-sm">
+            <div className="mb-5 inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-orange-200 bg-white px-3.5 py-2 text-[0.62rem] font-extrabold uppercase tracking-[0.1em] text-[#d95121] shadow-sm sm:px-4 sm:text-xs sm:tracking-[0.14em]">
               <span className="h-2 w-2 rounded-full bg-[#f26b3a]" />
               Cambodia · Community-led care
             </div>
-            <h1 className="max-w-3xl text-[2.55rem] font-extrabold leading-[1.03] tracking-[-0.04em] sm:text-6xl lg:text-[4.25rem]">
+            <h1 className="max-w-3xl text-[clamp(2rem,10.5vw,2.55rem)] font-extrabold leading-[1.03] tracking-[-0.04em] sm:text-6xl lg:text-[4.25rem]">
               Helping children.
               <span className="block text-[#f26b3a]">Building hope.</span>
               <span className="block">Changing lives.</span>
@@ -42,7 +42,7 @@ export default function Home() {
           </div>
 
           <div className="relative order-1 lg:order-2">
-            <div className="relative min-h-[360px] overflow-hidden rounded-[30px] bg-stone-200 shadow-[0_30px_80px_rgb(64_38_23/18%)] sm:min-h-[540px] lg:min-h-[650px] lg:rounded-[42px]">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-[28px] bg-stone-200 shadow-[0_30px_80px_rgb(64_38_23/18%)] sm:aspect-auto sm:min-h-[540px] sm:rounded-[30px] lg:min-h-[650px] lg:rounded-[42px]">
               <Image
                 src="/images/children-2.jpg"
                 alt="Children and members of the community team together in Cambodia"
@@ -51,15 +51,15 @@ export default function Home() {
                 sizes="(min-width: 1024px) 54vw, 100vw"
                 className="object-cover object-center"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#201a15]/55 via-transparent to-transparent" />
-              <div className="absolute inset-x-4 bottom-4 rounded-2xl border border-white/20 bg-[#201a15]/80 p-4 text-white backdrop-blur-md sm:inset-x-auto sm:bottom-6 sm:left-6 sm:max-w-sm sm:p-5">
-                <p className="text-xs font-bold uppercase tracking-[0.15em] text-orange-200">Our belief</p>
-                <p className="mt-2 text-lg font-extrabold leading-snug">Every child deserves care, education, and the freedom to hope.</p>
-              </div>
+              <div className="absolute inset-0 hidden bg-gradient-to-t from-[#201a15]/55 via-transparent to-transparent sm:block" />
             </div>
-            <div className="absolute -right-2 top-6 rounded-2xl bg-white px-4 py-3 shadow-xl sm:-right-5 sm:top-12 sm:px-5">
-              <p className="text-2xl font-extrabold text-[#f26b3a]">79</p>
-              <p className="text-xs font-bold text-stone-500">children in daily care</p>
+            <div className="mt-3 rounded-2xl border border-white/20 bg-[#201a15] p-4 text-white sm:absolute sm:bottom-6 sm:left-6 sm:mt-0 sm:max-w-sm sm:bg-[#201a15]/80 sm:p-5 sm:backdrop-blur-md">
+              <p className="text-[0.68rem] font-bold uppercase tracking-[0.15em] text-orange-200 sm:text-xs">Our belief</p>
+              <p className="mt-1.5 text-base font-extrabold leading-snug sm:mt-2 sm:text-lg">Every child deserves care, education, and the freedom to hope.</p>
+            </div>
+            <div className="absolute right-3 top-3 rounded-xl bg-white px-3 py-2 shadow-xl sm:-right-5 sm:top-12 sm:rounded-2xl sm:px-5 sm:py-3">
+              <p className="text-xl font-extrabold leading-none text-[#f26b3a] sm:text-2xl sm:leading-normal">79</p>
+              <p className="mt-1 text-[0.62rem] font-bold text-stone-500 sm:mt-0 sm:text-xs">children in daily care</p>
             </div>
           </div>
         </div>
