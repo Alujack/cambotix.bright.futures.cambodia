@@ -18,25 +18,12 @@ declare global {
 
 const languages = [
   ['en', 'English'],
-  ['km', 'ភាសាខ្មែរ'],
+  ['fr', 'Français'],
+  ['de', 'Deutsch'],
   ['zh-CN', '中文'],
   ['ja', '日本語'],
   ['ko', '한국어'],
-  ['fr', 'Français'],
-  ['es', 'Español'],
-  ['de', 'Deutsch'],
-  ['it', 'Italiano'],
-  ['pt', 'Português'],
-  ['ru', 'Русский'],
   ['ar', 'العربية'],
-  ['hi', 'हिन्दी'],
-  ['th', 'ไทย'],
-  ['vi', 'Tiếng Việt'],
-  ['id', 'Bahasa Indonesia'],
-  ['ms', 'Bahasa Melayu'],
-  ['nl', 'Nederlands'],
-  ['tr', 'Türkçe'],
-  ['sv', 'Svenska'],
 ] as const;
 
 function readLangFromCookie(): string {
@@ -63,7 +50,13 @@ export default function LanguageSwitcher() {
   const [current, setCurrent] = useState('en');
 
   useEffect(() => {
-    setCurrent(readLangFromCookie());
+    const saved = readLangFromCookie();
+    if (saved !== 'en' && !languages.some(([code]) => code === saved)) {
+      // A language we no longer offer: reset the visitor back to English.
+      setLanguage('en');
+      return;
+    }
+    setCurrent(saved);
 
     if (document.getElementById('google-translate-script')) return;
     window.googleTranslateElementInit = () => {
