@@ -29,3 +29,25 @@ body {
   background: #f26b3a;
   color: #fff;
 }
+
+/* Google Translate widget: hide the injected top banner, tooltips and
+   text highlights so translation feels native to the site. */
+body {
+  top: 0 !important;
+}
+.goog-te-banner-frame,
+iframe.skiptranslate,
+#goog-gt-tt,
+.goog-te-balloon-frame,
+.VIpgJd-ZVi9od-ORHb-OEVmcd,
+.VIpgJd-suEOdc {
+  display: none !important;
+}
+.goog-text-highlight,
+.VIpgJd-yAWNEb-VIpgJd-fmcmS-sn54Q {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.goog-te-gadget {
+  font-size: 0;
+}
