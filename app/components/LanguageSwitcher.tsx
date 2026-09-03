@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useSyncExternalStore } from 'react';
 
 declare global {
   interface Window {
@@ -47,7 +47,11 @@ function setLanguage(code: string) {
 }
 
 export default function LanguageSwitcher() {
-  const [current, setCurrent] = useState('en');
+  const current = useSyncExternalStore(
+    () => () => undefined,
+    readLangFromCookie,
+    () => 'en',
+  );
 
   useEffect(() => {
     const saved = readLangFromCookie();
@@ -56,8 +60,6 @@ export default function LanguageSwitcher() {
       setLanguage('en');
       return;
     }
-    setCurrent(saved);
-
     if (document.getElementById('google-translate-script')) return;
     window.googleTranslateElementInit = () => {
       if (!window.google) return;

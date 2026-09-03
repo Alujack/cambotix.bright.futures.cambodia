@@ -1,14 +1,18 @@
+import Image from 'next/image';
+
 type HeartMarkProps = {
   className?: string;
 };
 
-export default function HeartMark({ className = '' }: HeartMarkProps) {
+export default function HeartMark({ className = 'h-10 w-10' }: HeartMarkProps) {
   return (
-    <img
+    <Image
       src="/images/logo.png"
       alt=""
       aria-hidden="true"
-      className={`h-10 w-10 shrink-0 object-contain ${className}`}
+      width={48}
+      height={48}
+      className={`shrink-0 object-contain ${className}`}
     />
   );
 }
