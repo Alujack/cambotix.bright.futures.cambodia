@@ -1,5 +1,20 @@
 export const NGO_NAME = 'Dr. Joseph Helping Children Community';
 
+export type FeedingBudget = {
+  title: string;
+  lead: string;
+  goal: string;
+  supportHeading: string;
+  perChild: { amount: string; label: string }[];
+  forAllChildren: { amount: string; label: string }[];
+  additionalHeading: string;
+  additionalCosts: { emoji: string; label: string; amount: string }[];
+  annualHeading: string;
+  annualBreakdown: { label: string; amount: string }[];
+  annualTotal: { emoji: string; label: string; amount: string };
+  notes: string[];
+};
+
 export type Project = {
   number: string;
   slug: string;
@@ -13,6 +28,7 @@ export type Project = {
   introduction: string;
   whatWeProvide: string[];
   whyItMatters: string;
+  feedingBudget?: FeedingBudget;
 };
 
 export const stats = [
@@ -96,6 +112,40 @@ export const projects: Project[] = [
     ],
     whyItMatters:
       'When food, care, and school essentials are dependable, children can focus their energy on learning, friendships, and growing well.',
+    feedingBudget: {
+      title: 'Feeding 79 Children — 3 Meals a Day',
+      lead: '$3 a day can help provide 3 meals for one child — breakfast, lunch, and dinner.',
+      goal:
+        'Our goal is to provide children with regular meals including rice, vegetables, meat, fish, eggs, other nutritious foods, and clean drinking water, according to the available food budget.',
+      supportHeading: 'Support for 79 Children',
+      perChild: [
+        { amount: '$3', label: 'a day/child' },
+        { amount: '$21', label: 'a week/child' },
+        { amount: '$90', label: 'a month/child' },
+      ],
+      forAllChildren: [
+        { amount: '$237', label: 'per day for 79 children' },
+        { amount: '$1,659', label: 'per week' },
+        { amount: '$7,110', label: 'per 30-day month' },
+        { amount: '$86,505', label: 'per year' },
+      ],
+      additionalHeading: 'Additional Monthly Costs',
+      additionalCosts: [
+        { emoji: '🔥', label: 'Cooking gas', amount: '$150/month' },
+        { emoji: '🏠', label: 'House rental', amount: '$150/month' },
+      ],
+      annualHeading: 'Total Estimated Annual Cost',
+      annualBreakdown: [
+        { label: 'Food', amount: '$86,505' },
+        { label: 'Cooking gas', amount: '$1,800' },
+        { label: 'House rental', amount: '$1,800' },
+      ],
+      annualTotal: { emoji: '❤️', label: 'Total', amount: '$90,105 per year' },
+      notes: [
+        "This food budget is specifically for the children's 3 daily meals and clean drinking water. It does not include school uniforms, school bags, stationery, shoes or sandals, healthcare, dental care, or other educational and personal needs.",
+        'Every contribution helps us continue providing children with regular meals and a safer, more stable environment to learn and grow.',
+      ],
+    },
   },
   {
     number: '02',
