@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import ActivityScroller from './components/ActivityScroller';
 import ProjectVisual from './components/ProjectVisual';
-import { impactUpdates, projects, stats, team } from './content';
+import { activities, impactUpdates, projects, stats, team } from './content';
 
 export default function Home() {
   return (
@@ -44,8 +45,8 @@ export default function Home() {
           <div className="relative order-1 lg:order-2">
             <div className="relative aspect-[4/3] overflow-hidden rounded-[28px] bg-stone-200 shadow-[0_30px_80px_rgb(64_38_23/18%)] sm:aspect-auto sm:min-h-[540px] sm:rounded-[30px] lg:min-h-[650px] lg:rounded-[42px]">
               <Image
-                src="/images/children-2.jpg"
-                alt="Children and members of the community team together in Cambodia"
+                src="/images/hero-community.jpg"
+                alt="Children, elders, and community members gathered with our team in front of the center"
                 fill
                 priority
                 sizes="(min-width: 1024px) 54vw, 100vw"
@@ -73,6 +74,20 @@ export default function Home() {
               <p className="mx-auto mt-2 max-w-[13rem] text-xs font-semibold leading-relaxed text-stone-500 sm:text-sm">{stat.label}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section id="activities" className="scroll-mt-36 overflow-hidden">
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+          <div className="mb-8 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+            <div className="max-w-3xl">
+              <p className="text-sm font-extrabold uppercase tracking-[0.16em] text-[#e05a29]">Recent activities</p>
+              <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-5xl">Everyday moments at the center.</h2>
+              <p className="mt-4 max-w-2xl leading-relaxed text-stone-600">Photos and short videos from daily life with the children: shared meals, visits from supporters, and time together.</p>
+            </div>
+            <Link href="/impact#activities" className="w-fit font-extrabold text-[#d95121] transition hover:translate-x-1">See all activities →</Link>
+          </div>
+          <ActivityScroller activities={activities} />
         </div>
       </section>
 
@@ -113,7 +128,7 @@ export default function Home() {
             <p className="text-sm font-extrabold uppercase tracking-[0.16em] text-[#e05a29]">Our story</p>
             <h2 className="mt-3 text-3xl font-extrabold leading-tight tracking-tight sm:text-5xl">A small beginning that kept growing.</h2>
             <p className="mt-6 leading-relaxed text-stone-600">
-              In 2010, Samnang began personally supporting 45 children in Takeo Province. Dr. Joseph later joined that work with generosity and compassion. Today, many of those children are university students and graduates—and the community continues to care for a new generation.
+              In 2010, Samnang began personally supporting 45 children in Takeo Province. Dr. Joseph later joined that work with generosity and compassion. Today, many of those children are university students and graduates, and the community continues to care for a new generation.
             </p>
             <blockquote className="mt-7 border-l-4 border-[#f26b3a] pl-5 text-xl font-extrabold leading-relaxed text-stone-800">
               “Real change grows through trust, consistency, and people caring for one another.”

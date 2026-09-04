@@ -113,8 +113,8 @@ export const projects: Project[] = [
     whyItMatters:
       'When food, care, and school essentials are dependable, children can focus their energy on learning, friendships, and growing well.',
     feedingBudget: {
-      title: 'Feeding 79 Children — 3 Meals a Day',
-      lead: '$3 a day can help provide 3 meals for one child — breakfast, lunch, and dinner.',
+      title: 'Feeding 79 Children with 3 Meals a Day',
+      lead: '$3 a day can help provide 3 meals for one child: breakfast, lunch, and dinner.',
       goal:
         'Our goal is to provide children with regular meals including rice, vegetables, meat, fish, eggs, other nutritious foods, and clean drinking water, according to the available food budget.',
       supportHeading: 'Support for 79 Children',
@@ -196,7 +196,7 @@ export const projects: Project[] = [
     image: '/images/food-support.jpg',
     imageAlt: 'Elderly community members receiving food support',
     description:
-      'Each month, 99 elders in need receive 15 kg of rice, soy-based food products, and dried meat—essential food that helps reduce the burden of hunger.',
+      'Each month, 99 elders in need receive 15 kg of rice, soy-based food products, and dried meat. This essential food helps reduce the burden of hunger.',
     highlight: '99 elders · Monthly essential food',
     introduction:
       'Older people are an important part of every community. We visit elders facing hardship and deliver dependable food support with care, conversation, and respect.',
@@ -251,4 +251,47 @@ export const volunteerWays = [
   ['👧', 'Spend time with and encourage the children'],
   ['🤝', 'Share your skills and experience'],
   ['❤️', 'Help in a way that matches your abilities'],
+];
+
+export type Activity = {
+  id: string;
+  kind: 'photo' | 'video';
+  category: string;
+  title: string;
+  description: string;
+  src: string;
+  poster?: string;
+  alt: string;
+};
+
+export const activities: Activity[] = [
+  {
+    id: 'lunch-together',
+    kind: 'photo',
+    category: 'Mealtime',
+    title: 'Lunch together',
+    description: 'The children sit together for a shared meal of bread and soup, served by our team at the center.',
+    src: '/images/activity-shared-meal.jpg',
+    alt: 'Children seated in rows on the floor of the center sharing a meal of bread and soup',
+  },
+  {
+    id: 'mealtime-up-close',
+    kind: 'video',
+    category: 'Mealtime',
+    title: 'Mealtime, up close',
+    description: 'A short clip from lunch at the center. Every child receives a warm meal each day.',
+    src: '/videos/activity-mealtime.mp4',
+    poster: '/images/activity-mealtime-poster.jpg',
+    alt: 'Short video of children eating lunch together on the floor of the center',
+  },
+  {
+    id: 'visit-from-a-supporter',
+    kind: 'video',
+    category: 'Community visit',
+    title: 'A visit from a supporter',
+    description: 'The children gather to welcome a visiting supporter and spend time together at the center.',
+    src: '/videos/activity-visitor-gathering.mp4',
+    poster: '/images/activity-visitor-gathering-poster.jpg',
+    alt: 'Short video of children gathered with a visiting supporter at the center',
+  },
 ];

@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import ActivityCard from '../components/ActivityCard';
 import PageIntro from '../components/PageIntro';
-import { impactUpdates, stats } from '../content';
+import { activities, impactUpdates, stats } from '../content';
 
 export const metadata: Metadata = {
   title: 'Impact & Updates | Dr. Joseph Helping Children Community',
@@ -26,6 +27,21 @@ export default function ImpactPage() {
               <p className="mt-2 text-xs font-semibold leading-relaxed text-stone-500 sm:text-sm">{stat.label}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section id="activities" className="scroll-mt-36">
+        <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
+          <div className="mb-10 max-w-3xl">
+            <p className="text-sm font-extrabold uppercase tracking-[0.16em] text-[#e05a29]">Recent activities</p>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Everyday moments at the center.</h2>
+            <p className="mt-4 leading-relaxed text-stone-600">Photos and short videos from daily life with the children: shared meals, visits from supporters, and time together.</p>
+          </div>
+          <div className="grid gap-5 sm:grid-cols-3">
+            {activities.map((activity) => (
+              <ActivityCard key={activity.id} activity={activity} />
+            ))}
+          </div>
         </div>
       </section>
 
