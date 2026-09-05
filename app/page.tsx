@@ -1,10 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import ActivityScroller from './components/ActivityScroller';
+import HeroSlideshow from './components/HeroSlideshow';
 import ProjectVisual from './components/ProjectVisual';
 import { activities, impactUpdates, projects, stats, team } from './content';
+import { getHeroSlides } from './lib/slideshow';
 
 export default function Home() {
+  const heroSlides = getHeroSlides();
+
   return (
     <main>
       <section className="relative overflow-hidden bg-[#fffaf4]">
@@ -44,15 +48,8 @@ export default function Home() {
 
           <div className="relative order-1 lg:order-2">
             <div className="relative aspect-[4/3] overflow-hidden rounded-[28px] bg-stone-200 shadow-[0_30px_80px_rgb(64_38_23/18%)] sm:aspect-auto sm:min-h-[540px] sm:rounded-[30px] lg:min-h-[650px] lg:rounded-[42px]">
-              <Image
-                src="/images/hero-community.jpg"
-                alt="Children, elders, and community members gathered with our team in front of the center"
-                fill
-                priority
-                sizes="(min-width: 1024px) 54vw, 100vw"
-                className="object-cover object-center"
-              />
-              <div className="absolute inset-0 hidden bg-gradient-to-t from-[#201a15]/55 via-transparent to-transparent sm:block" />
+              <HeroSlideshow slides={heroSlides} />
+              <div className="pointer-events-none absolute inset-0 hidden bg-gradient-to-t from-[#201a15]/55 via-transparent to-transparent sm:block" />
             </div>
             <div className="mt-3 rounded-2xl border border-white/20 bg-[#201a15] p-4 text-white sm:absolute sm:bottom-6 sm:left-6 sm:mt-0 sm:max-w-sm sm:bg-[#201a15]/80 sm:p-5 sm:backdrop-blur-md">
               <p className="text-[0.68rem] font-bold uppercase tracking-[0.15em] text-orange-200 sm:text-xs">Our belief</p>
