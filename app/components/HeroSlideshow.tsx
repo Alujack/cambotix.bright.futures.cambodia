@@ -129,31 +129,18 @@ export default function HeroSlideshow({
             type="button"
             onClick={() => goTo(state.index - 1)}
             aria-label="Show previous photo"
-            className="absolute left-3 top-1/2 z-30 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-white/85 text-stone-800 shadow-md backdrop-blur transition hover:bg-white sm:left-4 sm:h-11 sm:w-11"
+            className="absolute left-2 top-1/2 z-30 grid h-9 w-9 -translate-y-1/2 place-items-center text-white drop-shadow-[0_1px_3px_rgb(0_0_0/65%)] transition hover:scale-110 sm:left-3"
           >
-            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
           </button>
           <button
             type="button"
             onClick={() => goTo(state.index + 1)}
             aria-label="Show next photo"
-            className="absolute right-3 top-1/2 z-30 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-white/85 text-stone-800 shadow-md backdrop-blur transition hover:bg-white sm:right-4 sm:h-11 sm:w-11"
+            className="absolute right-2 top-1/2 z-30 grid h-9 w-9 -translate-y-1/2 place-items-center text-white drop-shadow-[0_1px_3px_rgb(0_0_0/65%)] transition hover:scale-110 sm:right-3"
           >
-            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 6l6 6-6 6" /></svg>
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M9 6l6 6-6 6" /></svg>
           </button>
-
-          <div className="absolute bottom-4 right-4 z-30 flex items-center gap-2 rounded-full bg-[#201a15]/45 px-3 py-2 backdrop-blur sm:bottom-6 sm:right-6">
-            {slides.map((slide, i) => (
-              <button
-                key={slide.image}
-                type="button"
-                onClick={() => goTo(i)}
-                aria-label={`Show photo ${i + 1} of ${count}`}
-                aria-current={i === state.index ? 'true' : undefined}
-                className={`h-2.5 rounded-full transition-all duration-300 ${i === state.index ? 'w-7 bg-white' : 'w-2.5 bg-white/55 hover:bg-white/85'}`}
-              />
-            ))}
-          </div>
 
           <p className="sr-only" aria-live="polite">{`Photo ${state.index + 1} of ${count}: ${current.alt}`}</p>
         </>
