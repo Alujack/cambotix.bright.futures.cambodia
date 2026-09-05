@@ -31,6 +31,13 @@ export type Project = {
   feedingBudget?: FeedingBudget;
 };
 
+// One photo in the home page slideshow. The list itself is read from the
+// public/images/slideshow folder by app/lib/slideshow.ts.
+export type HeroSlide = {
+  image: string;
+  alt: string;
+};
+
 export const stats = [
   { value: '79', label: 'Children receiving daily care' },
   { value: '≈1,500', label: 'Students supported' },
@@ -265,6 +272,36 @@ export type Activity = {
 };
 
 export const activities: Activity[] = [
+  {
+    id: 'new-footballs-and-toys',
+    kind: 'video',
+    category: 'Gift day',
+    title: 'New footballs and toys',
+    description: 'The children try out new footballs and toy trucks on the center floor, then gather round as a visiting supporter hands a gift to every child.',
+    src: '/videos/activity-footballs-and-toys.mp4',
+    poster: '/images/activity-footballs-and-toys-poster.jpg',
+    alt: 'Short video of children playing with new footballs and toy trucks inside the center, then receiving gifts from a visiting supporter',
+  },
+  {
+    id: 'opening-new-school-bags',
+    kind: 'video',
+    category: 'Gift day',
+    title: 'Opening new school bags',
+    description: 'A visiting supporter unpacks a new school bag with the children while our team helps hand out bags and toys around the room.',
+    src: '/videos/activity-school-bags.mp4',
+    poster: '/images/activity-school-bags-poster.jpg',
+    alt: 'Short video of a visiting supporter opening a new school bag surrounded by children at the center',
+  },
+  {
+    id: 'all-aboard-the-truck',
+    kind: 'video',
+    category: 'Community visit',
+    title: 'All aboard the truck',
+    description: 'The children squeeze into the green truck with our team for a ride together, waving and cheering the whole way.',
+    src: '/videos/activity-truck-ride.mp4',
+    poster: '/images/activity-truck-ride-poster.jpg',
+    alt: 'Short video filmed inside the green truck as the children wave and make peace signs with a member of our team',
+  },
   {
     id: 'lunch-together',
     kind: 'photo',
