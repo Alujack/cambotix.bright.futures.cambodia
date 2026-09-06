@@ -9,7 +9,6 @@ import type { BudgetItem, BudgetLine } from '../../content';
 type ProjectPageProps = {
   params: Promise<{ slug: string }>;
 };
-
 function BudgetItems({ items, columns = 'sm:grid-cols-2' }: { items: BudgetItem[]; columns?: string }) {
   return (
     <ul className={`mt-5 grid gap-3 ${columns}`}>
