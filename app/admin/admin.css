@@ -1,0 +1,50 @@
+.admin { background:#f8f6f3; min-height:75vh; color:#29221c; font-size:15px; }
+.admin a { text-underline-offset:4px; }
+.admin input:not([type=checkbox]), .admin textarea, .admin select { display:block; width:100%; border:1px solid #d6cec5; background:white; padding:11px 13px; border-radius:10px; font:inherit; margin-top:6px; }
+.admin textarea { min-height:96px; resize:vertical; }
+.admin input:focus,.admin textarea:focus,.admin select:focus { outline:2px solid #ef784a; outline-offset:2px; }
+.admin label { display:block; font-size:13px; font-weight:650; }
+.admin button,.admin .button { display:inline-flex; align-items:center; justify-content:center; gap:8px; border-radius:10px; padding:10px 16px; background:#29221c; color:white; font-size:14px; font-weight:700; cursor:pointer; }
+.admin button.secondary,.admin .button.secondary {background:white;color:#49372b;border:1px solid #d6cec5;}
+.admin button.danger {background:#a82d27;}
+.admin button:disabled {opacity:.5;cursor:wait;}
+.admin .card {border:1px solid #e6ded5;border-radius:18px;background:white;padding:24px;}
+.admin .notice {padding:14px 18px;border-radius:12px;background:#e8f4e7;color:#285626;white-space:pre-wrap;}
+.admin .error {background:#fce8e5;color:#972d23;}
+.admin .field-grid {display:grid;gap:18px;}
+.admin details > summary {cursor:pointer;list-style:revert;font-weight:700;padding:12px 0;}
+.admin .muted {color:#776c61;font-size:13px;}
+.admin .eyebrow {color:#c45129;font-size:11px;letter-spacing:.14em;font-weight:800;text-transform:uppercase;}
+.admin h1 {font-size:clamp(26px,4vw,36px);font-weight:800;letter-spacing:-.035em;}
+.admin h2 {font-size:20px;font-weight:750;}
+.admin .two {display:grid;gap:18px;}
+@media (min-width:640px){.admin .two{grid-template-columns:1fr 1fr;}}
+.admin label.check {display:flex;align-items:center;gap:10px;font-weight:600;cursor:pointer;}
+.admin label.check input {width:18px;height:18px;margin:0;}
+.admin button.small,.admin .button.small {padding:6px 10px;font-size:12px;border-radius:8px;}
+.admin .list {display:grid;gap:12px;min-width:0;}
+.admin .list-head {display:flex;justify-content:space-between;align-items:baseline;font-weight:700;font-size:13px;}
+.admin .item {border:1px solid #e6ded5;border-radius:14px;background:#fcfbf9;padding:14px 16px;display:grid;gap:14px;min-width:0;}
+.admin details.item {display:block;}
+.admin details.item > summary {padding:2px 0;}
+.admin details.item[open] > summary {margin-bottom:12px;}
+.admin details.item > * + * {margin-top:14px;}
+.admin .item-tools {display:flex;gap:6px;justify-content:flex-end;flex-wrap:wrap;}
+.admin .tuple {display:grid;gap:12px;}
+.admin fieldset.group {border:1px solid #e6ded5;border-radius:14px;padding:14px 16px;display:grid;gap:14px;min-width:0;}
+.admin fieldset.group > legend {font-weight:750;font-size:13px;padding:0 6px;}
+.admin .thumb {display:block;border-radius:10px;border:1px solid #e6ded5;object-fit:cover;background:#f0ece7;margin-top:8px;max-width:100%;height:auto;}
+.admin .savebar {position:sticky;bottom:0;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-top:1px solid #e6ded5;padding:14px 0 4px;margin-top:24px;}
+.admin .media-grid {display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));}
+.admin .media-item {border:1px solid #e6ded5;border-radius:14px;padding:12px;display:grid;gap:8px;background:#fcfbf9;align-content:start;}
+.admin .media-thumb {display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;background:#eee;height:auto;}
+.admin code {background:#efe9e2;padding:2px 6px;border-radius:6px;font-size:13px;}
+.admin .copy-row {display:flex;gap:6px;align-items:end;}
+.admin .copy-row .grow {flex:1;min-width:0;}
+.admin .copy-row input {font-size:12px;}
+.admin .inline-action {display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.admin .error-text {color:#972d23;}
+.admin .actions {display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
+.admin .card.link {text-decoration:none;transition:border-color .15s;}
+.admin .card.link:hover {border-color:#ef784a;}
+.admin nav[aria-label="Breadcrumb"] a {font-weight:600;}

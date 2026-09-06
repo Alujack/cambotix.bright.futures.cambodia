@@ -1,0 +1,14 @@
+import Link from 'next/link';
+import { requireAdmin } from '../../lib/cms/auth';
+import { getPosts } from '../../lib/cms/content';
+import { getDb } from '../../lib/cms/db';
+export default async function Dashboard({searchParams}:{searchParams:Promise<{deleted?:string}>}) {
+ await requireAdmin();const posts=getPosts(false);const {deleted}=await searchParams;
+ const logs=getDb().prepare('SELECT audit.action,audit.target,audit.created_at,admins.email FROM audit LEFT JOIN admins ON admins.id=audit.admin_id ORDER BY audit.id DESC LIMIT 8').all() as {action:string;target:string;created_at:string;email:string}[];
+ return <main className="space-y-7"><div className="flex flex-wrap items-end justify-between gap-4"><div><p className="eyebrow">Your publishing desk</p><h1>Stories that make a difference.</h1><p className="muted mt-2">Write an update, build a page, or refresh your website.</p></div><div className="flex gap-3"><Link className="button" href="/admin/posts/new?kind=article">+ New article</Link><Link className="button secondary" href="/admin/posts/new?kind=page">+ New page</Link></div></div>
+ {deleted&&<p role="status" className="notice">Content deleted.</p>}
+ <div className="grid gap-4 sm:grid-cols-3">{[['Articles',posts.filter(p=>p.kind==='article').length],['Custom pages',posts.filter(p=>p.kind==='page').length],['Drafts',posts.filter(p=>p.status==='draft').length]].map(([label,count])=><div key={label} className="card"><p className="muted">{label}</p><p className="mt-2 text-4xl font-extrabold">{count}</p></div>)}</div>
+ <section className="card"><h2 className="mb-5">Articles & custom pages</h2>{posts.length?<div className="divide-y divide-stone-100">{posts.map(post=><div key={post.id} className="flex flex-wrap items-center justify-between gap-4 py-4"><div><Link className="font-bold hover:underline" href={`/admin/posts/${post.id}`}>{post.title}</Link><p className="muted mt-1">{post.kind} · {post.status} · /{post.kind==='article'?'articles/':''}{post.slug}</p></div><div className="flex gap-4 text-sm font-bold">{post.status==='published'&&<Link href={`/${post.kind==='article'?'articles/':''}${post.slug}`} target="_blank">View ↗</Link>}<Link href={`/admin/posts/${post.id}`}>Edit →</Link></div></div>)}</div>:<p className="muted">No posts yet. Create your first article, save a draft, then publish when it is ready.</p>}</section>
+ <section className="card"><h2>Website content</h2><p className="muted my-3">Edit existing page text, projects, the team, slideshow, activities, FAQs, and donation options.</p><Link className="button secondary" href="/admin/content">Manage website content →</Link></section>
+ <section className="card"><h2 className="mb-4">Recent admin activity</h2>{logs.map((log,index)=><p key={index} className="muted border-b border-stone-100 py-2">{log.email} · {log.action} · {log.target} · {log.created_at} UTC</p>)}</section></main>;
+}

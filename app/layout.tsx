@@ -3,6 +3,10 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import SiteFooter from './components/SiteFooter';
 import SiteHeader from './components/SiteHeader';
 import './globals.css';
+import ContentProvider from './components/ContentProvider';
+import { getNavPages, getSiteContent } from './lib/cms/content';
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -50,9 +54,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <SiteHeader />
+        <ContentProvider content={getSiteContent()}>
+        <SiteHeader pages={getNavPages()} />
         {children}
         <SiteFooter />
+        </ContentProvider>
       </body>
     </html>
   );

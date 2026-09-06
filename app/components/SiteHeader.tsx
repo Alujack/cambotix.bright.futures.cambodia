@@ -1,13 +1,16 @@
 'use client';
 
+import { useSiteContent } from '@/app/components/ContentProvider';
+
+
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import { NGO_NAME } from '../content';
+
 import HeartMark from './HeartMark';
 import LanguageSwitcher from './LanguageSwitcher';
 
-const links = [
+const baseLinks: [string, string][] = [
   ['Home', '/'],
   ['About Us', '/about'],
   ['Projects', '/projects'],
@@ -16,7 +19,15 @@ const links = [
   ['Contact Us', '/contact'],
 ];
 
-export default function SiteHeader() {
+type SiteHeaderProps = {
+  // Pages created in the admin panel that were marked to appear in the menu.
+  pages?: { slug: string; title: string }[];
+};
+
+export default function SiteHeader({ pages = [] }: SiteHeaderProps) {
+  const { copy, NGO_NAME } = useSiteContent();
+  const links: [string, string][] = [...baseLinks, ...pages.map((page): [string, string] => [page.title, `/${page.slug}`])];
+
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -25,19 +36,19 @@ export default function SiteHeader() {
       <div className="hidden bg-[#201a15] text-stone-200 sm:block">
         <div className="mx-auto flex h-9 max-w-7xl items-center justify-between gap-6 px-6 text-[0.67rem] font-semibold lg:px-8">
           <div className="flex items-center gap-5">
-            <a href="mailto:aloudoil@gmail.com" className="transition hover:text-white">✉&nbsp; aloudoil@gmail.com</a>
-            <a href="https://t.me/Lemongrassoils" target="_blank" rel="noopener noreferrer" className="transition hover:text-white">Telegram&nbsp; @Lemongrassoils</a>
+            <a href={copy["SiteHeader"]["001 href: mailto:aloudoil@gmail.com"]} className="transition hover:text-white">{copy["SiteHeader"]["002 ✉&nbsp; aloudoil@gmail.com"]}</a>
+            <a href={copy["SiteHeader"]["003 href: https://t.me/Lemongrassoils"]} target="_blank" rel="noopener noreferrer" className="transition hover:text-white">{copy["SiteHeader"]["004 Telegram&nbsp; @Lemongrassoils"]}</a>
           </div>
-          <p className="text-stone-400">Community-led support in Cambodia 🇰🇭</p>
+          <p className="text-stone-400">{copy["SiteHeader"]["005 Community-led support in Cambodia 🇰🇭"]}</p>
         </div>
       </div>
 
       <div className="mx-auto flex min-h-[72px] max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8 xl:gap-6 xl:py-0">
-        <Link href="/" className="flex min-w-0 items-center gap-2.5 xl:shrink-0">
+        <Link href={copy["SiteHeader"]["006 href: /"]} className="flex min-w-0 items-center gap-2.5 xl:shrink-0">
           <HeartMark className="h-11 w-11" />
           <span className="text-xs font-extrabold leading-[1.22] tracking-tight sm:text-sm">
-            <span className="block xl:hidden">Dr. Joseph Helping</span>
-            <span className="block xl:hidden">Children Community</span>
+            <span className="block xl:hidden">{copy["SiteHeader"]["007 Dr. Joseph Helping"]}</span>
+            <span className="block xl:hidden">{copy["SiteHeader"]["008 Children Community"]}</span>
             <span className="hidden whitespace-nowrap text-sm xl:block 2xl:text-base">{NGO_NAME}</span>
           </span>
         </Link>
@@ -62,11 +73,9 @@ export default function SiteHeader() {
         <div className="flex shrink-0 items-center gap-2">
           <LanguageSwitcher />
           <Link
-            href="/contact#donate"
+            href={copy["SiteHeader"]["009 href: /contact#donate"]}
             className="hidden rounded-xl bg-[#f26b3a] px-5 py-2.5 text-sm font-bold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-[#df5524] xl:block"
-          >
-            Donate now
-          </Link>
+          >{copy["SiteHeader"]["010 Donate now"]}</Link>
           <button
             type="button"
             onClick={() => setMenuOpen((open) => !open)}
@@ -99,12 +108,10 @@ export default function SiteHeader() {
               );
             })}
             <Link
-              href="/contact#donate"
+              href={copy["SiteHeader"]["011 href: /contact#donate"]}
               onClick={() => setMenuOpen(false)}
               className="mt-2 rounded-xl bg-[#f26b3a] px-4 py-3.5 text-center text-sm font-bold text-white"
-            >
-              Donate now
-            </Link>
+            >{copy["SiteHeader"]["012 Donate now"]}</Link>
           </div>
         </nav>
       )}

@@ -1,9 +1,11 @@
+import { getSiteContent } from '@/app/lib/cms/content';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import ActivityCard from '../components/ActivityCard';
 import PageIntro from '../components/PageIntro';
-import { activities, impactUpdates, stats } from '../content';
+import PlacedArticles from '../components/PlacedArticles';
+
 
 export const metadata: Metadata = {
   title: 'Impact & Updates | Dr. Joseph Helping Children Community',
@@ -11,12 +13,14 @@ export const metadata: Metadata = {
 };
 
 export default function ImpactPage() {
+  const { copy, activities, impactUpdates, stats } = getSiteContent();
+
   return (
     <main>
       <PageIntro
-        eyebrow="Impact & Updates"
-        title="See the work through the people it serves."
-        description="We share clear, respectful updates about the practical support reaching children, families, and elders in our community."
+        eyebrow={copy["impact"]["001 eyebrow: Impact & Updates"]}
+        title={copy["impact"]["002 title: See the work through the people it serves."]}
+        description={copy["impact"]["003 description: We share clear, respectful updates about the "]}
       />
 
       <section aria-label="Impact statistics" className="border-b border-orange-100 bg-white">
@@ -33,9 +37,9 @@ export default function ImpactPage() {
       <section id="activities" className="scroll-mt-36">
         <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
           <div className="mb-10 max-w-3xl">
-            <p className="text-sm font-extrabold uppercase tracking-[0.16em] text-[#e05a29]">Recent activities</p>
-            <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Everyday moments at the center.</h2>
-            <p className="mt-4 leading-relaxed text-stone-600">Photos and short videos from daily life with the children: shared meals, visits from supporters, and time together.</p>
+            <p className="text-sm font-extrabold uppercase tracking-[0.16em] text-[#e05a29]">{copy["impact"]["004 Recent activities"]}</p>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">{copy["impact"]["005 Everyday moments at the center."]}</h2>
+            <p className="mt-4 leading-relaxed text-stone-600">{copy["impact"]["006 Photos and short videos from daily life with the c"]}</p>
           </div>
           <div className="grid gap-5 sm:grid-cols-3">
             {activities.map((activity) => (
@@ -60,10 +64,8 @@ export default function ImpactPage() {
                   <p className="mt-5 text-lg leading-relaxed text-stone-600">{update.excerpt}</p>
                   <p className="mt-6 w-fit rounded-2xl bg-orange-50 px-4 py-2 text-sm font-extrabold text-[#d95121]">{update.metric}</p>
                   <div className="mt-8 border-t border-orange-100 pt-6">
-                    <p className="text-sm leading-relaxed text-stone-500">
-                      Our team works directly with the community and shares follow-up with supporters. Contact us if you would like the latest information about this area of work.
-                    </p>
-                    <Link href="/contact" className="mt-4 inline-flex font-extrabold text-[#d95121]">Ask for the latest update →</Link>
+                    <p className="text-sm leading-relaxed text-stone-500">{copy["impact"]["007 Our team works directly with the community and sha"]}</p>
+                    <Link href={copy["impact"]["008 href: /contact"]} className="mt-4 inline-flex font-extrabold text-[#d95121]">{copy["impact"]["009 Ask for the latest update →"]}</Link>
                   </div>
                 </div>
               </div>
@@ -72,11 +74,13 @@ export default function ImpactPage() {
         </div>
       </section>
 
+      <PlacedArticles placement="impact" tone="white" />
+
       <section className="bg-[#fff1e9]">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 sm:py-20 lg:grid-cols-[0.75fr_1.25fr] lg:items-center lg:px-8">
           <div>
-            <p className="text-sm font-extrabold uppercase tracking-[0.16em] text-[#e05a29]">Our commitment</p>
-            <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Respect before publicity.</h2>
+            <p className="text-sm font-extrabold uppercase tracking-[0.16em] text-[#e05a29]">{copy["impact"]["010 Our commitment"]}</p>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">{copy["impact"]["011 Respect before publicity."]}</h2>
           </div>
           <div className="grid gap-4 sm:grid-cols-3">
             {[

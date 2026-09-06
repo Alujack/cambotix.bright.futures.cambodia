@@ -1,18 +1,17 @@
+import { getSiteContent } from '@/app/lib/cms/content';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import ProjectVisual from '../../components/ProjectVisual';
-import { projects } from '../../content';
+
 
 type ProjectPageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export function generateStaticParams() {
-  return projects.map((project) => ({ slug: project.slug }));
-}
 
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
+  const { projects } = getSiteContent();
   const { slug } = await params;
   const project = projects.find((item) => item.slug === slug);
 
@@ -36,6 +35,8 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
+  const { copy, projects } = getSiteContent();
+
   const { slug } = await params;
   const project = projects.find((item) => item.slug === slug);
 
@@ -47,9 +48,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     <main>
       <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
         <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-stone-400">
-          <Link href="/" className="transition hover:text-[#d95121]">Home</Link>
+          <Link href={copy["projects/[slug]"]["001 href: /"]} className="transition hover:text-[#d95121]">{copy["projects/[slug]"]["002 Home"]}</Link>
           <span aria-hidden="true">/</span>
-          <Link href="/projects" className="transition hover:text-[#d95121]">Projects</Link>
+          <Link href={copy["projects/[slug]"]["003 href: /projects"]} className="transition hover:text-[#d95121]">{copy["projects/[slug]"]["004 Projects"]}</Link>
           <span aria-hidden="true">/</span>
           <span className="text-[#d95121]">{project.shortTitle}</span>
         </nav>
@@ -61,11 +62,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               <div className="absolute inset-0 bg-gradient-to-t from-[#201a15]/35 via-transparent to-transparent" />
             </div>
             <div className="flex flex-col justify-center p-7 sm:p-12 lg:p-14">
-              <p className="text-sm font-extrabold uppercase tracking-[0.16em] text-[#ff8b62]">Project {project.number}</p>
+              <p className="text-sm font-extrabold uppercase tracking-[0.16em] text-[#ff8b62]">{copy["projects/[slug]"]["005 Project"]} {project.number}</p>
               <h1 className="mt-3 text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">{project.title}</h1>
               <p className="mt-6 leading-relaxed text-stone-300">{project.description}</p>
               <p className="mt-7 w-fit rounded-2xl bg-white/10 px-5 py-3 text-sm font-extrabold text-orange-100">{project.highlight}</p>
-              <Link href="/contact#donate" className="mt-8 w-full rounded-2xl bg-[#f26b3a] px-7 py-4 text-center font-extrabold text-white transition hover:bg-[#df5524] sm:w-fit">Support this project</Link>
+              <Link href={copy["projects/[slug]"]["006 href: /contact#donate"]} className="mt-8 w-full rounded-2xl bg-[#f26b3a] px-7 py-4 text-center font-extrabold text-white transition hover:bg-[#df5524] sm:w-fit">{copy["projects/[slug]"]["007 Support this project"]}</Link>
             </div>
           </div>
         </div>
@@ -73,10 +74,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
       <section className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 sm:py-20 lg:grid-cols-[1fr_0.72fr] lg:px-8">
         <div>
-          <p className="text-sm font-extrabold uppercase tracking-[0.16em] text-[#e05a29]">How it helps</p>
-          <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">Support designed around real daily needs.</h2>
+          <p className="text-sm font-extrabold uppercase tracking-[0.16em] text-[#e05a29]">{copy["projects/[slug]"]["008 How it helps"]}</p>
+          <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">{copy["projects/[slug]"]["009 Support designed around real daily needs."]}</h2>
           <p className="mt-6 text-lg leading-relaxed text-stone-600">{project.introduction}</p>
-          <h3 className="mt-10 text-2xl font-extrabold">What we provide</h3>
+          <h3 className="mt-10 text-2xl font-extrabold">{copy["projects/[slug]"]["010 What we provide"]}</h3>
           <ul className="mt-5 grid gap-3 sm:grid-cols-2">
             {project.whatWeProvide.map((item) => (
               <li key={item} className="flex gap-3 rounded-2xl border border-orange-100 bg-white p-4 text-sm font-semibold leading-relaxed text-stone-700">
@@ -87,12 +88,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </ul>
         </div>
         <aside className="h-fit rounded-[28px] bg-[#fff1e9] p-6 sm:p-8 lg:sticky lg:top-40">
-          <p className="text-xs font-extrabold uppercase tracking-[0.16em] text-[#e05a29]">Why it matters</p>
+          <p className="text-xs font-extrabold uppercase tracking-[0.16em] text-[#e05a29]">{copy["projects/[slug]"]["011 Why it matters"]}</p>
           <p className="mt-4 text-xl font-extrabold leading-relaxed text-stone-800">{project.whyItMatters}</p>
           <div className="mt-7 border-t border-orange-200 pt-6">
-            <p className="text-sm font-bold text-stone-600">Want to help?</p>
-            <p className="mt-2 text-sm leading-relaxed text-stone-500">Our team can explain current needs, useful supplies, volunteering options, or how to give.</p>
-            <Link href="/contact" className="mt-5 inline-flex font-extrabold text-[#d95121]">Talk with our team →</Link>
+            <p className="text-sm font-bold text-stone-600">{copy["projects/[slug]"]["012 Want to help?"]}</p>
+            <p className="mt-2 text-sm leading-relaxed text-stone-500">{copy["projects/[slug]"]["013 Our team can explain current needs, useful supplie"]}</p>
+            <Link href={copy["projects/[slug]"]["014 href: /contact"]} className="mt-5 inline-flex font-extrabold text-[#d95121]">{copy["projects/[slug]"]["015 Talk with our team →"]}</Link>
           </div>
         </aside>
       </section>
@@ -101,7 +102,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <section id="feeding-budget" className="scroll-mt-36 border-t border-orange-100 bg-[#fffaf4]">
           <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
             <div className="max-w-3xl">
-              <p className="text-sm font-extrabold uppercase tracking-[0.16em] text-[#e05a29]">Feeding program</p>
+              <p className="text-sm font-extrabold uppercase tracking-[0.16em] text-[#e05a29]">{copy["projects/[slug]"]["016 Feeding program"]}</p>
               <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">{project.feedingBudget.title}</h2>
               <p className="mt-6 text-xl font-extrabold leading-relaxed text-stone-800">{project.feedingBudget.lead}</p>
               <p className="mt-4 leading-relaxed text-stone-600">{project.feedingBudget.goal}</p>
@@ -157,7 +158,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   </p>
                   <p className="mt-1 text-2xl font-extrabold sm:text-3xl">{project.feedingBudget.annualTotal.amount}</p>
                 </div>
-                <Link href="/contact#donate" className="mt-6 block rounded-2xl bg-[#f26b3a] px-6 py-3.5 text-center font-extrabold text-white transition hover:bg-[#df5524]">Help feed the children</Link>
+                <Link href={copy["projects/[slug]"]["017 href: /contact#donate"]} className="mt-6 block rounded-2xl bg-[#f26b3a] px-6 py-3.5 text-center font-extrabold text-white transition hover:bg-[#df5524]">{copy["projects/[slug]"]["018 Help feed the children"]}</Link>
               </aside>
             </div>
 
@@ -174,10 +175,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
           <div className="mb-8 flex items-end justify-between gap-5">
             <div>
-              <p className="text-sm font-extrabold uppercase tracking-[0.16em] text-[#e05a29]">Keep exploring</p>
-              <h2 className="mt-2 text-3xl font-extrabold tracking-tight">Related projects</h2>
+              <p className="text-sm font-extrabold uppercase tracking-[0.16em] text-[#e05a29]">{copy["projects/[slug]"]["019 Keep exploring"]}</p>
+              <h2 className="mt-2 text-3xl font-extrabold tracking-tight">{copy["projects/[slug]"]["020 Related projects"]}</h2>
             </div>
-            <Link href="/projects" className="hidden font-extrabold text-[#d95121] sm:block">All projects →</Link>
+            <Link href={copy["projects/[slug]"]["021 href: /projects"]} className="hidden font-extrabold text-[#d95121] sm:block">{copy["projects/[slug]"]["022 All projects →"]}</Link>
           </div>
           <div className="grid gap-4 md:grid-cols-3">
             {relatedProjects.map((related) => (
@@ -185,7 +186,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 <p className="text-xs font-extrabold text-[#d95121]">{related.number}</p>
                 <h3 className="mt-3 text-xl font-extrabold group-hover:text-[#d95121]">{related.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-stone-600">{related.highlight}</p>
-                <span className="mt-5 inline-block text-sm font-bold text-[#d95121]">Explore →</span>
+                <span className="mt-5 inline-block text-sm font-bold text-[#d95121]">{copy["projects/[slug]"]["023 Explore →"]}</span>
               </Link>
             ))}
           </div>
