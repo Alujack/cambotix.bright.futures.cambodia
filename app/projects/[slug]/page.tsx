@@ -3,11 +3,37 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import ProjectVisual from '../../components/ProjectVisual';
+import type { BudgetItem, BudgetLine } from '../../content';
 
 
 type ProjectPageProps = {
   params: Promise<{ slug: string }>;
 };
+
+function BudgetItems({ items, columns = 'sm:grid-cols-2' }: { items: BudgetItem[]; columns?: string }) {
+  return (
+    <ul className={`mt-5 grid gap-3 ${columns}`}>
+      {items.map((item) => (
+        <li key={item.label} className="flex items-center gap-4 rounded-2xl border border-orange-100 bg-white p-4">
+          <span aria-hidden="true" className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-orange-100 text-xl">{item.emoji}</span>
+          <div>
+            <p className="text-sm font-semibold text-stone-600">{item.label}</p>
+            <p className="text-lg font-extrabold text-stone-900">{item.amount}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function BudgetTotal({ line }: { line: BudgetLine }) {
+  return (
+    <p className="mt-3 flex items-baseline justify-between gap-4 rounded-2xl bg-[#fff1e9] px-5 py-4">
+      <span className="text-sm font-extrabold uppercase tracking-[0.12em] text-[#d95121]">{line.label}</span>
+      <span className="shrink-0 text-2xl font-extrabold text-stone-900">{line.amount}</span>
+    </p>
+  );
+}
 
 
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
@@ -42,6 +68,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   if (!project) notFound();
 
+  const budget = project.feedingBudget;
   const relatedProjects = projects.filter((item) => item.slug !== project.slug).slice(0, 3);
 
   return (
@@ -98,29 +125,35 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         </aside>
       </section>
 
-      {project.feedingBudget && (
+      {budget && (
         <section id="feeding-budget" className="scroll-mt-36 border-t border-orange-100 bg-[#fffaf4]">
           <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
             <div className="max-w-3xl">
               <p className="text-sm font-extrabold uppercase tracking-[0.16em] text-[#e05a29]">{copy["projects/[slug]"]["016 Feeding program"]}</p>
-              <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">{project.feedingBudget.title}</h2>
-              <p className="mt-6 text-xl font-extrabold leading-relaxed text-stone-800">{project.feedingBudget.lead}</p>
-              <p className="mt-4 leading-relaxed text-stone-600">{project.feedingBudget.goal}</p>
+              <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">{budget.title}</h2>
+              <p className="mt-6 text-xl font-extrabold leading-relaxed text-stone-800">{budget.lead}</p>
+              <p className="mt-4 leading-relaxed text-stone-600">{budget.goal}</p>
             </div>
 
             <div className="mt-12 grid gap-8 lg:grid-cols-[1fr_0.8fr] lg:items-start">
               <div>
-                <h3 className="text-2xl font-extrabold">{project.feedingBudget.supportHeading}</h3>
+                <h3 className="text-2xl font-extrabold">{budget.perChildHeading}</h3>
                 <div className="mt-5 grid gap-3 sm:grid-cols-3">
-                  {project.feedingBudget.perChild.map((item) => (
+                  {budget.perChild.map((item) => (
                     <div key={item.label} className="rounded-2xl border border-orange-100 bg-white p-5">
                       <p className="text-3xl font-extrabold text-[#d95121]">{item.amount}</p>
                       <p className="mt-1 text-sm font-semibold text-stone-600">{item.label}</p>
                     </div>
                   ))}
                 </div>
-                <ul className="mt-4 divide-y divide-orange-100 rounded-2xl border border-orange-100 bg-white">
-                  {project.feedingBudget.forAllChildren.map((item) => (
+
+                <h3 className="mt-10 text-2xl font-extrabold">{budget.dailyFoodHeading}</h3>
+                <BudgetItems items={budget.dailyFood} />
+                <BudgetTotal line={budget.dailyFoodTotal} />
+
+                <p className="mt-8 text-xs font-extrabold uppercase tracking-[0.16em] text-[#e05a29]">{budget.foodOverTimeHeading}</p>
+                <ul className="mt-3 divide-y divide-orange-100 rounded-2xl border border-orange-100 bg-white">
+                  {budget.foodOverTime.map((item) => (
                     <li key={item.label} className="flex items-baseline justify-between gap-4 px-5 py-3.5">
                       <span className="text-sm font-semibold text-stone-600">{item.label}</span>
                       <span className="text-lg font-extrabold text-stone-900">{item.amount}</span>
@@ -128,44 +161,62 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   ))}
                 </ul>
 
-                <h3 className="mt-10 text-2xl font-extrabold">{project.feedingBudget.additionalHeading}</h3>
-                <ul className="mt-5 grid gap-3 sm:grid-cols-2">
-                  {project.feedingBudget.additionalCosts.map((item) => (
-                    <li key={item.label} className="flex items-center gap-4 rounded-2xl border border-orange-100 bg-white p-4">
-                      <span aria-hidden="true" className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-orange-100 text-xl">{item.emoji}</span>
-                      <div>
-                        <p className="text-sm font-semibold text-stone-600">{item.label}</p>
-                        <p className="text-lg font-extrabold text-stone-900">{item.amount}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
+                <h3 className="mt-10 text-2xl font-extrabold">{budget.monthlyHeading}</h3>
+                <BudgetItems items={budget.monthly} columns="sm:grid-cols-3" />
+                <BudgetTotal line={budget.monthlyTotal} />
               </div>
 
               <aside className="rounded-[28px] bg-[#201a15] p-6 text-white sm:p-8 lg:sticky lg:top-40">
-                <p className="text-xs font-extrabold uppercase tracking-[0.16em] text-[#ff8b62]">{project.feedingBudget.annualHeading}</p>
+                <p className="text-xs font-extrabold uppercase tracking-[0.16em] text-[#ff8b62]">{budget.totalHeading}</p>
                 <dl className="mt-5 divide-y divide-white/10">
-                  {project.feedingBudget.annualBreakdown.map((item) => (
+                  {budget.totalBreakdown.map((item) => (
                     <div key={item.label} className="flex items-baseline justify-between gap-4 py-3">
                       <dt className="text-sm font-semibold text-stone-300">{item.label}</dt>
-                      <dd className="text-lg font-extrabold">{item.amount}</dd>
+                      <dd className="shrink-0 text-lg font-extrabold">{item.amount}</dd>
                     </div>
                   ))}
                 </dl>
                 <div className="mt-5 rounded-2xl bg-white/10 px-5 py-4">
                   <p className="text-sm font-bold text-orange-100">
-                    <span aria-hidden="true">{project.feedingBudget.annualTotal.emoji}</span> {project.feedingBudget.annualTotal.label}
+                    <span aria-hidden="true">{budget.totalAnnual.emoji}</span> {budget.totalAnnual.label}
                   </p>
-                  <p className="mt-1 text-2xl font-extrabold sm:text-3xl">{project.feedingBudget.annualTotal.amount}</p>
+                  <p className="mt-1 text-2xl font-extrabold sm:text-3xl">{budget.totalAnnual.amount}</p>
                 </div>
                 <Link href={copy["projects/[slug]"]["017 href: /contact#donate"]} className="mt-6 block rounded-2xl bg-[#f26b3a] px-6 py-3.5 text-center font-extrabold text-white transition hover:bg-[#df5524]">{copy["projects/[slug]"]["018 Help feed the children"]}</Link>
               </aside>
             </div>
 
-            <div className="mt-10 space-y-4 rounded-2xl border border-orange-100 bg-white p-6 sm:p-8">
-              {project.feedingBudget.notes.map((note) => (
-                <p key={note} className="text-sm leading-relaxed text-stone-600 last:text-base last:font-semibold last:text-stone-800">{note}</p>
-              ))}
+            <div className="mt-10 rounded-2xl border border-orange-100 bg-white p-6 sm:p-8">
+              <p className="text-xs font-extrabold uppercase tracking-[0.16em] text-[#e05a29]">{budget.notesHeading}</p>
+              <div className="mt-5 grid gap-8 sm:grid-cols-2">
+                <div>
+                  <p className="font-extrabold leading-snug text-stone-800">{budget.includedHeading}</p>
+                  <ul className="mt-4 space-y-2.5">
+                    {budget.included.map((item) => (
+                      <li key={item} className="flex gap-3 text-sm leading-relaxed text-stone-700">
+                        <span aria-hidden="true" className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-orange-100 text-[0.65rem] font-extrabold text-[#d95121]">✓</span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <p className="font-extrabold leading-snug text-stone-800">{budget.excludedHeading}</p>
+                  <ul className="mt-4 space-y-2.5">
+                    {budget.excluded.map((item) => (
+                      <li key={item} className="flex gap-3 text-sm leading-relaxed text-stone-500">
+                        <span aria-hidden="true" className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-stone-100 text-[0.65rem] font-extrabold text-stone-400">✕</span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              <div className="mt-6 space-y-3 border-t border-orange-100 pt-6">
+                {budget.notes.map((note) => (
+                  <p key={note} className="text-sm leading-relaxed text-stone-600 last:text-base last:font-semibold last:text-stone-800">{note}</p>
+                ))}
+              </div>
             </div>
           </div>
         </section>
