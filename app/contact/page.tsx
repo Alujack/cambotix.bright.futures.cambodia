@@ -2,6 +2,7 @@ import { getSiteContent } from '@/app/lib/cms/content';
 import type { Metadata } from 'next';
 import DonateWidget from '../components/DonateWidget';
 import PageIntro from '../components/PageIntro';
+import PlacedArticles from '../components/PlacedArticles';
 
 export const metadata: Metadata = {
   title: 'Contact Us | Dr. Joseph Helping Children Community',
@@ -57,6 +58,7 @@ export default function ContactPage() {
           <DonateWidget />
         </div>
       </section>
+      <PlacedArticles placement="contact" tone="white" />
     </main>
   );
 }

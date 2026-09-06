@@ -4,7 +4,7 @@ import SiteFooter from './components/SiteFooter';
 import SiteHeader from './components/SiteHeader';
 import './globals.css';
 import ContentProvider from './components/ContentProvider';
-import { getSiteContent } from './lib/cms/content';
+import { getNavPages, getSiteContent } from './lib/cms/content';
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 
@@ -55,7 +55,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ContentProvider content={getSiteContent()}>
-        <SiteHeader />
+        <SiteHeader pages={getNavPages()} />
         {children}
         <SiteFooter />
         </ContentProvider>

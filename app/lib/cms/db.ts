@@ -5,7 +5,7 @@ import path from 'node:path';
 let database: DatabaseSync | undefined;
 export function getDb() {
  if (database) return database;
- const filename = path.resolve(process.env.DATABASE_PATH || './data/site.sqlite');
+ const filename = path.resolve(/*turbopackIgnore: true*/ process.cwd(), process.env.DATABASE_PATH || 'data/site.sqlite');
  mkdirSync(path.dirname(filename), { recursive: true, mode: 0o700 });
  database = new DatabaseSync(filename);
  database.exec(`

@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import PageIntro from '../components/PageIntro';
+import PlacedArticles from '../components/PlacedArticles';
 
 
 export const metadata: Metadata = {
@@ -102,6 +103,8 @@ export default function VolunteersPage() {
           </div>
         </div>
       </section>
+
+      <PlacedArticles placement="volunteers" />
 
       <section className="mx-auto max-w-4xl px-4 py-16 text-center sm:px-6 sm:py-24">
         <p className="text-sm font-extrabold uppercase tracking-[0.16em] text-[#e05a29]">{copy["volunteers"]["024 Start with a hello"]}</p>

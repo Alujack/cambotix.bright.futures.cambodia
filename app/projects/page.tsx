@@ -2,6 +2,7 @@ import { getSiteContent } from '@/app/lib/cms/content';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import PageIntro from '../components/PageIntro';
+import PlacedArticles from '../components/PlacedArticles';
 import ProjectVisual from '../components/ProjectVisual';
 
 
@@ -51,6 +52,8 @@ export default function ProjectsPage() {
           ))}
         </div>
       </section>
+
+      <PlacedArticles placement="projects" tone="white" />
 
       <section className="bg-[#201a15] text-white">
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 px-4 py-14 sm:px-6 lg:flex-row lg:items-center lg:px-8">

@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import ActivityScroller from './components/ActivityScroller';
 import HeroSlideshow from './components/HeroSlideshow';
+import PlacedArticles from './components/PlacedArticles';
 import ProjectVisual from './components/ProjectVisual';
 
 
@@ -232,6 +233,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <PlacedArticles placement="home" />
 
       <section className="bg-[#fff1e9]">
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 px-4 py-14 sm:px-6 sm:py-16 lg:flex-row lg:items-center lg:px-8">

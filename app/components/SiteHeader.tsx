@@ -10,7 +10,7 @@ import { useState } from 'react';
 import HeartMark from './HeartMark';
 import LanguageSwitcher from './LanguageSwitcher';
 
-const links = [
+const baseLinks: [string, string][] = [
   ['Home', '/'],
   ['About Us', '/about'],
   ['Projects', '/projects'],
@@ -19,8 +19,14 @@ const links = [
   ['Contact Us', '/contact'],
 ];
 
-export default function SiteHeader() {
+type SiteHeaderProps = {
+  // Pages created in the admin panel that were marked to appear in the menu.
+  pages?: { slug: string; title: string }[];
+};
+
+export default function SiteHeader({ pages = [] }: SiteHeaderProps) {
   const { copy, NGO_NAME } = useSiteContent();
+  const links: [string, string][] = [...baseLinks, ...pages.map((page): [string, string] => [page.title, `/${page.slug}`])];
 
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);

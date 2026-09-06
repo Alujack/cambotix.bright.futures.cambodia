@@ -16,7 +16,7 @@ try {
   terminal._writeToOutput=()=>{};
   try { password=await rl.question(''); } finally { terminal._writeToOutput=write; process.stdout.write('\n'); }
  }
- if (password.length<12 || password.length>256) throw new Error('Use a password of 12–256 characters.');
+ if (password.length<12 || password.length>256) throw new Error('Use a password of 12 to 256 characters.');
  const db=getDb();
  const existing=db.prepare('SELECT id FROM admins WHERE email=?').get(email);
  if (existing) throw new Error('This admin already exists. Change its password from /admin/account.');

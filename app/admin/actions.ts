@@ -9,8 +9,10 @@ import { getDb, audit } from '../lib/cms/db';
 import { hashPassword, verifyPassword, hashToken } from '../lib/cms/password';
 import { defaults, type Section } from '../lib/cms/defaults';
 import { validateSection, postSchema, errorMessage } from '../lib/cms/validation';
-export type ActionState = { error?: string; success?: string; revision?: number };
+import { mediaUsage, sectionSeed } from '../lib/cms/content';
+export type ActionState = { error?: string; success?: string; revision?: number; data?: unknown };
 const refresh = () => revalidatePath('/', 'layout');
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 export async function login(_state:ActionState, form:FormData):Promise<ActionState> {
  const email=String(form.get('email')||'').trim().toLowerCase();
  const password=String(form.get('password')||'');
@@ -50,6 +52,15 @@ export async function saveContent(section:string, data:unknown, revision:number)
   audit(admin.id,'updated content',section);refresh();return {success:'Saved. Your changes are now live.',revision:revision+1};
  } catch(error) {return {error:errorMessage(error)};}
 }
+export async function resetSection(section:string, revision:number):Promise<ActionState> {
+ const admin=await requireAdmin();
+ if(!Object.hasOwn(defaults,section))return {error:'Unknown content section.'};
+ const seed=sectionSeed(section as Section);
+ const result=getDb().prepare('UPDATE content SET data=?,revision=revision+1 WHERE section=? AND revision=?').run(JSON.stringify(seed),section,revision);
+ if(!result.changes)return {error:'This section changed in another window. Reload and try again.'};
+ audit(admin.id,'restored original content',section);refresh();
+ return {success:'Restored the original website text for this section.',revision:revision+1,data:seed};
+}
 export async function savePost(_state:ActionState, form:FormData):Promise<ActionState> {
  const admin=await requireAdmin();
  let id='';
@@ -70,13 +81,14 @@ export async function savePost(_state:ActionState, form:FormData):Promise<Action
 }
 export async function deletePost(id:string, revision:number):Promise<ActionState> {
  const admin=await requireAdmin();
+ if(!UUID.test(id))return {error:'Unknown item.'};
  const result=getDb().prepare('DELETE FROM posts WHERE id=? AND revision=?').run(id,revision);
  if(!result.changes)return {error:'This item changed or was already deleted. Reload the page.'};
  audit(admin.id,'deleted post',id);refresh();redirect('/admin?deleted=1');
 }
 export async function changePassword(_state:ActionState,form:FormData):Promise<ActionState> {
  const admin=await requireAdmin();const password=String(form.get('password')||'');
- if(password.length<12||password.length>256)return {error:'Use a new password of 12–256 characters.'};
+ if(password.length<12||password.length>256)return {error:'Use a new password of 12 to 256 characters.'};
  if(password!==form.get('confirm'))return {error:'The new passwords do not match.'};
  const current=String(form.get('current')||'');
  if(current.length>256)return {error:'Current password is incorrect.'};
@@ -87,6 +99,7 @@ export async function changePassword(_state:ActionState,form:FormData):Promise<A
  audit(admin.id,'changed password','account');
  (await cookies()).delete(COOKIE);redirect('/admin/login?changed=1');
 }
+const MP4_BRANDS=['isom','iso2','iso5','iso6','mp41','mp42','avc1','M4V ','dash'];
 export async function uploadMedia(_state:ActionState,form:FormData):Promise<ActionState> {
  const admin=await requireAdmin();const file=form.get('file');
  if(!(file instanceof File)||file.size===0||file.size>8*1024*1024)return {error:'Select a JPEG, PNG, WebP, GIF, or MP4 file up to 8 MB.'};
@@ -96,8 +109,17 @@ export async function uploadMedia(_state:ActionState,form:FormData):Promise<Acti
  else if(data.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])))mime='image/png';
  else if(['GIF87a','GIF89a'].includes(data.toString('ascii',0,6)))mime='image/gif';
  else if(data.toString('ascii',0,4)==='RIFF'&&data.toString('ascii',8,12)==='WEBP')mime='image/webp';
- else if(data.toString('ascii',4,8)==='ftyp'&&['isom','iso2','mp41','mp42','avc1','M4V '].includes(data.toString('ascii',8,12)))mime='video/mp4';
+ else if(data.toString('ascii',4,8)==='ftyp'&&MP4_BRANDS.includes(data.toString('ascii',8,12)))mime='video/mp4';
  if(!mime)return {error:'Unsupported file content. Upload a JPEG, PNG, WebP, GIF, or MP4.'};
  const id=randomUUID();getDb().prepare('INSERT INTO media (id,name,mime,data) VALUES (?,?,?,?)').run(id,file.name.slice(0,200),mime,data);
  audit(admin.id,'uploaded media',id);revalidatePath('/admin/media');return {success:`Uploaded. Media URL: /media/${id}`};
+}
+export async function deleteMedia(id:string):Promise<ActionState> {
+ const admin=await requireAdmin();
+ if(!UUID.test(id))return {error:'Unknown file.'};
+ const usage=mediaUsage(id);
+ if(usage.length)return {error:`This file is still used in ${usage.slice(0,3).join(', ')}. Replace it there first.`};
+ const result=getDb().prepare('DELETE FROM media WHERE id=?').run(id);
+ if(!result.changes)return {error:'This file was already deleted.'};
+ audit(admin.id,'deleted media',id);revalidatePath('/admin/media');return {success:'File deleted.'};
 }

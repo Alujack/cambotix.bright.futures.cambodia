@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import ActivityCard from '../components/ActivityCard';
 import PageIntro from '../components/PageIntro';
+import PlacedArticles from '../components/PlacedArticles';
 
 
 export const metadata: Metadata = {
@@ -72,6 +73,8 @@ export default function ImpactPage() {
           ))}
         </div>
       </section>
+
+      <PlacedArticles placement="impact" tone="white" />
 
       <section className="bg-[#fff1e9]">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 sm:py-20 lg:grid-cols-[0.75fr_1.25fr] lg:items-center lg:px-8">
