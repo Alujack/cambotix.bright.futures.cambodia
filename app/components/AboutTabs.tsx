@@ -1,7 +1,10 @@
 'use client';
 
+import { useSiteContent } from '@/app/components/ContentProvider';
+
+
 import { useEffect, useState } from 'react';
-import { team, values } from '../content';
+
 
 const tabs = [
   ['history', 'Our History'],
@@ -18,6 +21,8 @@ function isTabId(value: string): value is TabId {
 }
 
 export default function AboutTabs() {
+  const { copy, team, values } = useSiteContent();
+
   const [active, setActive] = useState<TabId>('history');
 
   useEffect(() => {
@@ -38,7 +43,7 @@ export default function AboutTabs() {
   return (
     <div className="grid gap-5 sm:gap-8 lg:grid-cols-[280px_1fr] lg:items-start">
       <div className="rounded-2xl border border-orange-100 bg-white p-2 sm:rounded-3xl sm:p-4 lg:sticky lg:top-36">
-        <p className="px-3 pb-2 pt-2 text-xs font-extrabold uppercase tracking-wider text-stone-400 sm:px-4 sm:pb-3">About Us</p>
+        <p className="px-3 pb-2 pt-2 text-xs font-extrabold uppercase tracking-wider text-stone-400 sm:px-4 sm:pb-3">{copy["AboutTabs"]["001 About Us"]}</p>
         <nav aria-label="About sections" className="grid grid-cols-2 gap-1 lg:block lg:space-y-1">
           {tabs.map(([id, label], index) => (
             <button
@@ -64,27 +69,12 @@ export default function AboutTabs() {
       <div className="min-h-0 rounded-3xl border border-orange-100 bg-white p-5 sm:min-h-[520px] sm:rounded-[32px] sm:p-10">
         {active === 'history' && (
           <section aria-labelledby="history-heading">
-            <p className="text-sm font-bold uppercase tracking-wider text-[#f26b3a]">Our story</p>
-            <h2 id="history-heading" className="mt-3 text-2xl font-extrabold tracking-tight sm:text-3xl">A journey that began with 45 children</h2>
+            <p className="text-sm font-bold uppercase tracking-wider text-[#f26b3a]">{copy["AboutTabs"]["002 Our story"]}</p>
+            <h2 id="history-heading" className="mt-3 text-2xl font-extrabold tracking-tight sm:text-3xl">{copy["AboutTabs"]["003 A journey that began with 45 children"]}</h2>
             <div className="mt-6 space-y-5 leading-relaxed text-stone-600">
-              <p>
-                In 2010, Samnang began personally supporting 45 children at an
-                orphanage in Takeo Province, Cambodia. It was not easy, but he
-                believed every child deserved care, education, and a chance for
-                a better future.
-              </p>
-              <p>
-                Samnang shared the work on Facebook, hoping others would see the
-                children&apos;s needs and join. Dr. Joseph from the United States
-                was the first person to contact the team. He came to Cambodia
-                and personally supported the children. His kindness and
-                compassion became an important part of the journey.
-              </p>
-              <p>
-                Today, those 45 children have grown up. Many are studying at
-                university and some have graduated. To honor Dr. Joseph&apos;s
-                contribution, Samnang established the name <strong className="text-stone-800">Dr. Joseph Helping Children Community</strong> in 2024.
-              </p>
+              <p>{copy["AboutTabs"]["004 In 2010, Samnang began personally supporting 45 ch"]}</p>
+              <p>{copy["AboutTabs"]["005 Samnang shared the work on Facebook, hoping others"]}</p>
+              <p>{copy["AboutTabs"]["006 Today, those 45 children have grown up. Many are s"]}<strong className="text-stone-800">{copy["AboutTabs"]["007 Dr. Joseph Helping Children Community"]}</strong>{copy["AboutTabs"]["008 in 2024."]}</p>
             </div>
             <div className="mt-8 grid overflow-hidden rounded-2xl border border-orange-100 sm:grid-cols-3">
               {[
@@ -98,21 +88,15 @@ export default function AboutTabs() {
                 </div>
               ))}
             </div>
-            <p className="mt-8 rounded-2xl bg-[#201a15] px-6 py-5 text-center text-lg font-extrabold text-white">
-              Helping Children. Building Hope. Changing Lives.
-            </p>
+            <p className="mt-8 rounded-2xl bg-[#201a15] px-6 py-5 text-center text-lg font-extrabold text-white">{copy["AboutTabs"]["009 Helping Children. Building Hope. Changing Lives."]}</p>
           </section>
         )}
 
         {active === 'who-we-are' && (
           <section aria-labelledby="team-heading">
-            <p className="text-sm font-bold uppercase tracking-wider text-[#f26b3a]">Who we are</p>
-            <h2 id="team-heading" className="mt-3 text-2xl font-extrabold tracking-tight sm:text-3xl">Local care, shared responsibility</h2>
-            <p className="mt-5 max-w-3xl leading-relaxed text-stone-600">
-              We are a team working together to support children and communities
-              in Cambodia. Leadership, fundraising, administration, technology,
-              and daily care come together to keep our projects responsible and effective.
-            </p>
+            <p className="text-sm font-bold uppercase tracking-wider text-[#f26b3a]">{copy["AboutTabs"]["010 Who we are"]}</p>
+            <h2 id="team-heading" className="mt-3 text-2xl font-extrabold tracking-tight sm:text-3xl">{copy["AboutTabs"]["011 Local care, shared responsibility"]}</h2>
+            <p className="mt-5 max-w-3xl leading-relaxed text-stone-600">{copy["AboutTabs"]["012 We are a team working together to support children"]}</p>
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
               {team.map((member) => (
                 <article key={member.name} className="rounded-2xl bg-[#fdf8f3] p-5">
@@ -134,11 +118,8 @@ export default function AboutTabs() {
           <section aria-labelledby="mission-heading" className="grid min-h-[300px] place-items-center sm:min-h-[430px]">
             <div className="max-w-2xl text-center">
               <span className="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-orange-100 text-3xl">🎯</span>
-              <p className="mt-7 text-sm font-bold uppercase tracking-wider text-[#f26b3a]">Our mission</p>
-              <h2 id="mission-heading" className="mt-4 text-2xl font-extrabold leading-snug tracking-tight sm:text-4xl">
-                To support children and communities in need through education,
-                food, care, and meaningful opportunities for a better future.
-              </h2>
+              <p className="mt-7 text-sm font-bold uppercase tracking-wider text-[#f26b3a]">{copy["AboutTabs"]["013 Our mission"]}</p>
+              <h2 id="mission-heading" className="mt-4 text-2xl font-extrabold leading-snug tracking-tight sm:text-4xl">{copy["AboutTabs"]["014 To support children and communities in need throug"]}</h2>
             </div>
           </section>
         )}
@@ -147,19 +128,16 @@ export default function AboutTabs() {
           <section aria-labelledby="vision-heading" className="grid min-h-[300px] place-items-center sm:min-h-[430px]">
             <div className="max-w-2xl text-center">
               <span className="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-orange-100 text-3xl">🌅</span>
-              <p className="mt-7 text-sm font-bold uppercase tracking-wider text-[#f26b3a]">Our vision</p>
-              <h2 id="vision-heading" className="mt-4 text-2xl font-extrabold leading-snug tracking-tight sm:text-4xl">
-                A caring and supportive Cambodia where every child can learn,
-                grow, and live with hope and dignity.
-              </h2>
+              <p className="mt-7 text-sm font-bold uppercase tracking-wider text-[#f26b3a]">{copy["AboutTabs"]["015 Our vision"]}</p>
+              <h2 id="vision-heading" className="mt-4 text-2xl font-extrabold leading-snug tracking-tight sm:text-4xl">{copy["AboutTabs"]["016 A caring and supportive Cambodia where every child"]}</h2>
             </div>
           </section>
         )}
 
         {active === 'values' && (
           <section aria-labelledby="values-heading">
-            <p className="text-sm font-bold uppercase tracking-wider text-[#f26b3a]">Our values</p>
-            <h2 id="values-heading" className="mt-3 text-2xl font-extrabold tracking-tight sm:text-3xl">The principles behind our work</h2>
+            <p className="text-sm font-bold uppercase tracking-wider text-[#f26b3a]">{copy["AboutTabs"]["017 Our values"]}</p>
+            <h2 id="values-heading" className="mt-3 text-2xl font-extrabold tracking-tight sm:text-3xl">{copy["AboutTabs"]["018 The principles behind our work"]}</h2>
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
               {values.map(([title, text], index) => (
                 <article key={title} className={`rounded-2xl border border-orange-100 p-6 ${index === values.length - 1 ? 'sm:col-span-2' : ''}`}>

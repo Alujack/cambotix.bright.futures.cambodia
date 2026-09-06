@@ -33,3 +33,10 @@ yarn-error.log*
 next-env.d.ts
 /dist/
 *.tsbuildinfo
+
+# Database, backups and local admin credentials
+/data/
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+!.env.example

@@ -1,0 +1,80 @@
+{
+  "volunteerssteps": [
+    [
+      "01",
+      "Start a conversation",
+      "Tell us about your experience, interests, preferred dates, and how long you hope to stay."
+    ],
+    [
+      "02",
+      "Plan together",
+      "Our local team will discuss current needs and agree on a useful, realistic role with you."
+    ],
+    [
+      "03",
+      "Prepare your visit",
+      "We will help with practical information, local expectations, and accommodation planning."
+    ],
+    [
+      "04",
+      "Serve with support",
+      "You will meet the team, receive local guidance, and adapt your contribution as you learn."
+    ]
+  ],
+  "volunteersfaqs": [
+    [
+      "Do I need special qualifications?",
+      "Not always. Some activities benefit from teaching or professional experience, while others need patience, creativity, practical help, and a willingness to listen."
+    ],
+    [
+      "Where can volunteers stay?",
+      "A local family stay may be available. The suggested contribution is $10 per day, paid directly to the host family to help cover accommodation and daily support."
+    ],
+    [
+      "How long should I volunteer?",
+      "Contact us with your available dates. We will be honest about what is practical and whether your proposed time can create a useful experience for everyone."
+    ],
+    [
+      "Can I fundraise without travelling?",
+      "Yes. You can invite friends, family, or your community to support a project even if you cannot visit Cambodia."
+    ]
+  ],
+  "contactfaqs": [
+    [
+      "How can I donate?",
+      "Message us on Telegram or email. We will send our KHQR code or bank details, confirm when your gift arrives, and follow up with a receipt and photos."
+    ],
+    [
+      "Can I give supplies instead of money?",
+      "Yes. Rice, school supplies, uniforms, and books are always helpful. Please contact us first so we can share what is most needed."
+    ],
+    [
+      "Can I visit or volunteer?",
+      "Yes. Contact us on Telegram or email and our team will help arrange your visit and discuss how your skills can help."
+    ]
+  ],
+  "DonateWidgettiers": [
+    {
+      "amount": 27,
+      "impact": "feeds one child every day for a month"
+    },
+    {
+      "amount": 70,
+      "impact": "feeds all 79 children for a full day"
+    },
+    {
+      "amount": 123,
+      "impact": "covers a full year of school supplies for one child"
+    },
+    {
+      "amount": 446,
+      "impact": "fully supports one child for an entire year"
+    }
+  ],
+  "DonateWidgetpaymentMethods": [
+    "KHQR",
+    "ABA Pay",
+    "Visa",
+    "Mastercard"
+  ]
+}

@@ -1,19 +1,19 @@
 'use client';
 
+import { useSiteContent } from '@/app/components/ContentProvider';
+
+
 import { useState } from 'react';
 
 type Frequency = 'once' | 'monthly';
 
-const tiers = [
-  { amount: 27, impact: 'feeds one child every day for a month' },
-  { amount: 70, impact: 'feeds all 79 children for a full day' },
-  { amount: 123, impact: 'covers a full year of school supplies for one child' },
-  { amount: 446, impact: 'fully supports one child for an entire year' },
-];
 
-const paymentMethods = ['KHQR', 'ABA Pay', 'Visa', 'Mastercard'];
+
+
 
 export default function DonateWidget() {
+  const { copy, DonateWidgettiers: tiers, DonateWidgetpaymentMethods: paymentMethods } = useSiteContent();
+
   const [frequency, setFrequency] = useState<Frequency>('once');
   const [selected, setSelected] = useState<number | null>(70);
   const [custom, setCustom] = useState('');
@@ -74,7 +74,7 @@ export default function DonateWidget() {
           type="number"
           min="1"
           inputMode="decimal"
-          placeholder="Custom amount"
+          placeholder={copy["DonateWidget"]["001 placeholder: Custom amount"]}
           value={custom}
           onChange={(e) => setCustom(e.target.value)}
           className="w-full bg-transparent text-lg font-semibold outline-none placeholder:text-sm placeholder:font-normal placeholder:text-stone-400"
@@ -83,9 +83,8 @@ export default function DonateWidget() {
 
       <p className="mt-5 min-h-10 rounded-xl bg-stone-50 px-4 py-2.5 text-sm text-stone-600">
         {amount && amount > 0 ? (
-          <>
-            Your <strong>${amount}</strong>{' '}
-            {frequency === 'monthly' ? 'monthly' : 'one-time'} gift{' '}
+          <>{copy["DonateWidget"]["002 Your"]}<strong>${amount}</strong>{' '}
+            {frequency === 'monthly' ? 'monthly' : 'one-time'} {copy["DonateWidget"]["003 gift"]}{' '}
             {activeTier ? activeTier.impact : 'goes directly to meals and school support for our 79 children and rice for our elders'}
             .
           </>
@@ -106,16 +105,12 @@ export default function DonateWidget() {
       </div>
 
       <a
-        href="#contact"
+        href={copy["DonateWidget"]["004 href: #contact"]}
         className="mt-5 block rounded-2xl bg-[#f26b3a] px-6 py-4 text-center text-base font-bold text-white transition hover:bg-[#e05a29]"
-      >
-        Donate {amount && amount > 0 ? `$${amount}` : ''}{' '}
+      >{copy["DonateWidget"]["005 Donate"]}{amount && amount > 0 ? `$${amount}` : ''}{' '}
         {frequency === 'monthly' ? 'monthly' : ''}
       </a>
-      <p className="mt-3 text-center text-xs text-stone-400">
-        Online payments via KHQR &amp; ABA PayWay are launching soon. Contact
-        us below to give today.
-      </p>
+      <p className="mt-3 text-center text-xs text-stone-400">{copy["DonateWidget"]["006 Online payments via KHQR &amp; ABA PayWay are laun"]}</p>
     </div>
   );
 }
