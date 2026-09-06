@@ -1,9 +1,11 @@
-import { redirect } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import { currentAdmin } from '../../lib/cms/auth';
 import { getDb } from '../../lib/cms/db';
+import { CMS_ENABLED } from '../../lib/cms/flags';
 import { login } from '../actions';
 import Form from '../Form';
 export default async function LoginPage({searchParams}:{searchParams:Promise<{changed?:string}>}) {
+ if(!CMS_ENABLED)notFound();
  if(await currentAdmin())redirect('/admin');
  const configured=Boolean(getDb().prepare('SELECT id FROM admins LIMIT 1').get());
  const {changed}=await searchParams;

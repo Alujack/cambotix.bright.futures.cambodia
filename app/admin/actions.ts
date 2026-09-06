@@ -8,12 +8,14 @@ import { COOKIE, requireAdmin } from '../lib/cms/auth';
 import { getDb, audit } from '../lib/cms/db';
 import { hashPassword, verifyPassword, hashToken } from '../lib/cms/password';
 import { defaults, type Section } from '../lib/cms/defaults';
+import { CMS_ENABLED } from '../lib/cms/flags';
 import { validateSection, postSchema, errorMessage } from '../lib/cms/validation';
 import { mediaUsage, sectionSeed } from '../lib/cms/content';
 export type ActionState = { error?: string; success?: string; revision?: number; data?: unknown };
 const refresh = () => revalidatePath('/', 'layout');
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 export async function login(_state:ActionState, form:FormData):Promise<ActionState> {
+ if(!CMS_ENABLED)return {error:'The admin panel is disabled on this site.'};
  const email=String(form.get('email')||'').trim().toLowerCase();
  const password=String(form.get('password')||'');
  if(!z.email().safeParse(email).success || password.length>256)return {error:'Email or password is incorrect.'};
@@ -38,6 +40,7 @@ export async function login(_state:ActionState, form:FormData):Promise<ActionSta
  redirect('/admin');
 }
 export async function logout() {
+ if(!CMS_ENABLED)redirect('/');
  const jar=await cookies();const token=jar.get(COOKIE)?.value;
  if(token)getDb().prepare('DELETE FROM sessions WHERE token_hash=?').run(hashToken(token));
  jar.delete(COOKIE);redirect('/admin/login');

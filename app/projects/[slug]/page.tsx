@@ -3,12 +3,36 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import ProjectVisual from '../../components/ProjectVisual';
+import type { BudgetItem, BudgetLine } from '../../content';
 
 
 type ProjectPageProps = {
   params: Promise<{ slug: string }>;
 };
+function BudgetItems({ items, columns = 'sm:grid-cols-2' }: { items: BudgetItem[]; columns?: string }) {
+  return (
+    <ul className={`mt-5 grid gap-3 ${columns}`}>
+      {items.map((item) => (
+        <li key={item.label} className="flex items-center gap-4 rounded-2xl border border-orange-100 bg-white p-4">
+          <span aria-hidden="true" className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-orange-100 text-xl">{item.emoji}</span>
+          <div>
+            <p className="text-sm font-semibold text-stone-600">{item.label}</p>
+            <p className="text-lg font-extrabold text-stone-900">{item.amount}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  );
+}
 
+function BudgetTotal({ line }: { line: BudgetLine }) {
+  return (
+    <p className="mt-3 flex items-baseline justify-between gap-4 rounded-2xl bg-[#fff1e9] px-5 py-4">
+      <span className="text-sm font-extrabold uppercase tracking-[0.12em] text-[#d95121]">{line.label}</span>
+      <span className="shrink-0 text-2xl font-extrabold text-stone-900">{line.amount}</span>
+    </p>
+  );
+}
 
 
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
@@ -105,9 +129,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
             <div className="max-w-3xl">
               <p className="text-sm font-extrabold uppercase tracking-[0.16em] text-[#e05a29]">{copy["projects/[slug]"]["016 Feeding program"]}</p>
-              <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">{project.feedingBudget.title}</h2>
-              <p className="mt-6 text-xl font-extrabold leading-relaxed text-stone-800">{project.feedingBudget.lead}</p>
-              <p className="mt-4 leading-relaxed text-stone-600">{project.feedingBudget.goal}</p>
+              <h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">{budget.title}</h2>
+              <p className="mt-6 text-xl font-extrabold leading-relaxed text-stone-800">{budget.lead}</p>
+              <p className="mt-4 leading-relaxed text-stone-600">{budget.goal}</p>
             </div>
 
             <div className="mt-12 grid gap-8 lg:grid-cols-[1fr_0.8fr] lg:items-start">
