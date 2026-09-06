@@ -1,17 +1,32 @@
 export const NGO_NAME = 'Dr. Joseph Helping Children Community';
 
+export type BudgetLine = { label: string; amount: string };
+export type BudgetItem = { emoji: string; label: string; amount: string };
+
+// The cost breakdown shown on a project page. Every heading is editable so the
+// block can be reworded in the admin panel without touching the layout.
 export type FeedingBudget = {
   title: string;
   lead: string;
   goal: string;
-  supportHeading: string;
-  perChild: { amount: string; label: string }[];
-  forAllChildren: { amount: string; label: string }[];
-  additionalHeading: string;
-  additionalCosts: { emoji: string; label: string; amount: string }[];
-  annualHeading: string;
-  annualBreakdown: { label: string; amount: string }[];
-  annualTotal: { emoji: string; label: string; amount: string };
+  perChildHeading: string;
+  perChild: BudgetLine[];
+  dailyFoodHeading: string;
+  dailyFood: BudgetItem[];
+  dailyFoodTotal: BudgetLine;
+  foodOverTimeHeading: string;
+  foodOverTime: BudgetLine[];
+  monthlyHeading: string;
+  monthly: BudgetItem[];
+  monthlyTotal: BudgetLine;
+  totalHeading: string;
+  totalBreakdown: BudgetLine[];
+  totalAnnual: BudgetItem;
+  notesHeading: string;
+  includedHeading: string;
+  included: string[];
+  excludedHeading: string;
+  excluded: string[];
   notes: string[];
 };
 
@@ -120,37 +135,69 @@ export const projects: Project[] = [
     whyItMatters:
       'When food, care, and school essentials are dependable, children can focus their energy on learning, friendships, and growing well.',
     feedingBudget: {
-      title: 'Feeding 79 Children with 3 Meals a Day',
-      lead: '$3 a day can help provide 3 meals for one child: breakfast, lunch, and dinner.',
+      title: 'The Basic Daily Needs of 79 Children',
+      lead: 'About $1.24 a day covers three meals, cooking gas, and housing for one child.',
       goal:
-        'Our goal is to provide children with regular meals including rice, vegetables, meat, fish, eggs, other nutritious foods, and clean drinking water, according to the available food budget.',
-      supportHeading: 'Support for 79 Children',
+        'These figures are based on feeding 79 children three meals a day, every day, using a 30-day month and a 365-day year. Cooking gas and house rental for the center are added to the food costs.',
+      perChildHeading: 'Average Cost Per Child',
       perChild: [
-        { amount: '$3', label: 'a day/child' },
-        { amount: '$21', label: 'a week/child' },
-        { amount: '$90', label: 'a month/child' },
+        { amount: '$1.24', label: 'a day for one child' },
+        { amount: '$37.22', label: 'a month for one child' },
+        { amount: '$452', label: 'a year for one child' },
       ],
-      forAllChildren: [
-        { amount: '$237', label: 'per day for 79 children' },
-        { amount: '$1,659', label: 'per week' },
-        { amount: '$7,110', label: 'per 30-day month' },
-        { amount: '$86,505', label: 'per year' },
+      dailyFoodHeading: 'Daily Food Expenses',
+      dailyFood: [
+        { emoji: '🍚', label: 'Rice, 15 kg a day', amount: '$18' },
+        { emoji: '🥬', label: 'Meat, vegetables, eggs, and other ingredients', amount: '$70' },
       ],
-      additionalHeading: 'Additional Monthly Costs',
-      additionalCosts: [
-        { emoji: '🔥', label: 'Cooking gas', amount: '$150/month' },
-        { emoji: '🏠', label: 'House rental', amount: '$150/month' },
+      dailyFoodTotal: { label: 'Total food cost per day', amount: '$88' },
+      foodOverTimeHeading: 'Food Expenses Over Time',
+      foodOverTime: [
+        { label: '1 day', amount: '$88' },
+        { label: '1 week (7 days)', amount: '$616' },
+        { label: '1 month (30 days)', amount: '$2,640' },
+        { label: '1 year (365 days)', amount: '$32,120' },
       ],
-      annualHeading: 'Total Estimated Annual Cost',
-      annualBreakdown: [
-        { label: 'Food', amount: '$86,505' },
-        { label: 'Cooking gas', amount: '$1,800' },
-        { label: 'House rental', amount: '$1,800' },
+      monthlyHeading: 'Monthly Basic Operating Expenses',
+      monthly: [
+        { emoji: '🍚', label: 'Food for 79 children', amount: '$2,640' },
+        { emoji: '🔥', label: 'Cooking gas', amount: '$150' },
+        { emoji: '🏠', label: 'House rental', amount: '$150' },
       ],
-      annualTotal: { emoji: '❤️', label: 'Total', amount: '$90,105 per year' },
+      monthlyTotal: { label: 'Total per month', amount: '$2,940' },
+      totalHeading: 'Total Basic Expenses for 79 Children',
+      totalBreakdown: [
+        { label: 'Per day (average, including gas and rent)', amount: 'about $98' },
+        { label: 'Per week (average)', amount: 'about $685' },
+        { label: 'Per month', amount: '$2,940' },
+      ],
+      totalAnnual: { emoji: '❤️', label: 'Total per year', amount: '$35,720' },
+      notesHeading: 'Important note',
+      includedHeading: 'This budget covers basic daily living needs only, including',
+      included: [
+        'Three meals a day: breakfast, lunch, and dinner',
+        'Rice',
+        'Meat',
+        'Vegetables',
+        'Eggs and other cooking ingredients',
+        'Cooking gas',
+        'House rental',
+      ],
+      excludedHeading: 'Not included',
+      excluded: [
+        'School supplies',
+        'Clothing',
+        'Shoes',
+        'Medical care',
+        'Dental care',
+        'Transportation',
+        'Electricity',
+        'Clean water',
+        'Staff salaries',
+        'Other emergency expenses',
+      ],
       notes: [
-        "This food budget is specifically for the children's 3 daily meals and clean drinking water. It does not include school uniforms, school bags, stationery, shoes or sandals, healthcare, dental care, or other educational and personal needs.",
-        'Every contribution helps us continue providing children with regular meals and a safer, more stable environment to learn and grow.',
+        'Every contribution helps us keep three meals on the table for all 79 children and the center running month after month.',
       ],
     },
   },
