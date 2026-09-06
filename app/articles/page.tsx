@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import { getPosts } from '@/app/lib/cms/content';
+import { CMS_ENABLED } from '@/app/lib/cms/flags';
 import ArticleCard from '../components/ArticleCard';
 import PageIntro from '../components/PageIntro';
 
@@ -10,6 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default function ArticlesPage() {
+  if (!CMS_ENABLED) notFound();
   const articles = getPosts().filter((post) => post.kind === 'article');
   return (
     <main>

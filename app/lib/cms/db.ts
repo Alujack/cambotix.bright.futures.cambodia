@@ -1,10 +1,12 @@
 import { DatabaseSync } from 'node:sqlite';
 import { mkdirSync } from 'node:fs';
 import path from 'node:path';
+import { CMS_ENABLED } from './flags';
 
 let database: DatabaseSync | undefined;
 export function getDb() {
  if (database) return database;
+ if (!CMS_ENABLED) throw new Error('The admin panel is disabled. Set CMS_ENABLED=true on a host with one always-on instance and a writable disk.');
  const filename = path.resolve(/*turbopackIgnore: true*/ process.cwd(), process.env.DATABASE_PATH || 'data/site.sqlite');
  mkdirSync(path.dirname(filename), { recursive: true, mode: 0o700 });
  database = new DatabaseSync(filename);
